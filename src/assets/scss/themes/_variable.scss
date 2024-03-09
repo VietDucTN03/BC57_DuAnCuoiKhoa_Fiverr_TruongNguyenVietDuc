@@ -1,0 +1,195 @@
+//Color
+//color-text
+$c0-text-dark: #1e1d1d;
+$c0-text-dark1: #5e5e5e;
+$c0-text-light: #f6f6f6;
+$c0-text-light1: #fff;
+$c0-text-red: #fc0303;
+$c0-text-green: #1ed90e;
+$c0-text-brown: #f8b653;
+$c0-text-grey: #404145;
+$c0-text-grey1: #737478;
+$c0-text-purple: #ae18e2;
+$c0-text-light-blue: linear-gradient(180deg, #6181f3 0%, #7c97f5 99.48%);
+//color-background
+$c0-bg-light: #fff;
+$c0-bg-black: #000000;
+$c0-bg-brown: #f8b653;
+$c0-bg-purple: #ae18e2;
+$c0-bg-darkbrown: #e1b067;
+$c0-bg-bgproduct: #f8f8f8;
+$c0-bg-grey: #cccccc;
+$c0-bg-light-blue: linear-gradient(180deg, #6181f3 0%, #7c97f5 99.48%);
+$c0-bg-purple-to-blue: linear-gradient(
+  270deg,
+  rgba(62, 32, 248, 0.9) 5.14%,
+  #d017ee 89.71%
+);
+$c0-bg-footer: #fafafa;
+$c1-bg-footer: #ececec;
+$c0-bg-line: #e5e5e5;
+$c0-bg-green: #9de167;
+$c0-bg-button: #1dbf73;
+$c1-bg-button: #9900ff;
+$c0-bg-transparent: rgba(255, 255, 255, 0);
+
+//Font-size:
+$fz-small: 10px;
+$fz-small1: 12px;
+$fz-small2: 14px;
+$fz-base: 16px;
+$fz-xl: 18px;
+$fz-xl1: 20px;
+$fz-xl2: 24px;
+$fz-xl3: 32px;
+$fz-xl4: 35px;
+$fz-xl5: 48px;
+//font-weight
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-maxbold: 900;
+
+@mixin text($fz: $fz-xl, $fw: $fw-light, $c: $c0-text-dark) {
+  font-size: $fz;
+  font-weight: $fw;
+  color: $c;
+}
+
+@mixin textRegister($fz: $fz-2xl, $fw: $fw-regular, $c: $c0-text-dark) {
+  font-size: $fz;
+  font-weight: $fw;
+  color: $c;
+}
+
+@mixin button($fz, $fw, $c, $bg, $border, $bg-hover, $c-hover) {
+  @include text($fz, $fw, $c);
+  background: $bg;
+  border: $border;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    background: $bg-hover;
+    color: $c-hover;
+    transition: all 0.5s;
+  }
+}
+
+@mixin buttonSearch {
+  color: #fff;
+  background-color: #198754;
+  border-color: #198754;
+  &:hover {
+    background-color: #157347;
+    border-color: #146c43;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem rgb(60, 153, 110);
+    outline: none;
+  }
+}
+
+@mixin buttonAction {
+  color: $c0-text-light;
+  font-size: $fz-2small;
+  height: 40px;
+  width: 100px;
+  border-radius: 20px;
+  background-color: $c1-bg-button;
+}
+
+@mixin bg(
+  $c: $c0-text-dark,
+  $fz: $fz-4xl,
+  $bg: $c0-text-grey,
+  $border: 1px solid $c0-bg-light
+) {
+  color: $c;
+  font-size: $fz;
+  background: $bg;
+  border: $border;
+}
+
+@mixin customAfterEffect {
+  &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0px;
+    max-width: 100%;
+    background-color: $c0-text-green;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease-in-out, right 0.3s ease-in-out;
+
+    @include text(
+      $fz: $fz-base,
+      $fw: $fw-regular,
+      $c: $c0-text-dark
+    ); // Adjust font size, weight, and color as needed
+  }
+
+  &:hover {
+    color: $c0-text-green;
+
+    &::after {
+      width: 100%;
+      // transition: width 0.3s ease-in-out, right 0.3s ease-in-out;
+      right: 0;
+    }
+  }
+}
+
+@mixin stretchedBorder {
+  &::after {
+    content: "";
+    position: absolute;
+    right: 50%;
+    top: 45px;
+    border-bottom: 2px solid #c5c6c9;
+    padding: 0 0 8px;
+    transform: translateX(50%);
+    width: 48px;
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    text-decoration: none;
+    &::after {
+      border-color: #1dbf73;
+      padding: 0 20px 8px;
+      width: 60%;
+    }
+  }
+}
+
+// @mixin buttonActionNextPervious {
+//     &::after {
+//         width: 40px; /* Đặt kích thước */
+//         height: 40px; /* Đặt kích thước */
+//         border-radius: 50%; /* Để tạo hình tròn */
+//         background-color: #ccc; /* Màu nền */
+//         border: none; /* Loại bỏ viền */
+//         cursor: pointer; /* Đổi con trỏ khi di chuột */
+//         display: flex; /* Hiển thị theo chiều ngang */
+//         justify-content: center; /* Canh giữa theo chiều ngang */
+//         align-items: center; /* Canh giữa theo chiều dọc */
+//         transition: width 0.3s, height 0.3s; /* Hiệu ứng chuyển đổi kích thước */
+//     }
+
+//     &:hover {
+//         width: 44px; /* Tăng kích thước khi hover */
+//         height: 44px; /* Tăng kích thước khi hover */
+//     }
+// }
+
+@mixin enlarge {
+  &::after {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  &:hover {
+    transform: scale(1.2);
+  }
+}

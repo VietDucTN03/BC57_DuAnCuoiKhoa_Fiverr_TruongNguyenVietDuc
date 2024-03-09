@@ -1,0 +1,190 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.job-detail {
+    // margin-top: 100px;
+    position: relative;
+    .container {
+        margin-top: 110px;
+        .job-detail-title {
+            color: #222325;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 36px;
+            padding: 20px 0 34px;
+        }
+        .job-detail-optionbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .left {
+                display: flex;
+                gap: 0.5rem;
+                .btn {
+                    border: 1px solid #dadbdd;
+                    border-radius: 4px;
+                    color: #222325;
+                    font-size: 16px;
+                    font-weight: 550;
+                    margin: 0 6px 0 0;
+                    padding: 6px 12px;
+                }
+                .dropdown-menu {
+                    border: 1px solid #e4e5e7;
+                    border-radius: 4px;
+                    min-width: 240px;
+                    padding: 18px;
+                    z-index: 1000;
+                    .dropdown-item {
+                        color: #404145;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding: 4px 0;
+                        display: flex;
+                        justify-content: space-between;
+                        span {
+                            color: #b5b6ba;
+                        }
+                    }
+                    .dropdown-item.active {
+                        color: #1dbf73;
+                        background: none;
+                    }
+                }
+                .dropdown-menu.show {
+                    position: absolute;
+                    will-change: transform;
+                    top: 0px;
+                    left: 0px;
+                    transform: translate3d(0px, -126px, 0px);
+                    display: block;
+                }
+            }
+            .right {
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                .form-check-input:checked {
+                    background-color: green;
+                    border-color: green;
+                }
+            }
+        }
+        .job-detail-sort {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .categories-amount {
+                color: #74767e;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 22px;
+                padding: 0 10px;
+            }
+            .sort-by {
+                span {
+                    font-size: 16px;
+                    padding: 0;
+                }
+                select {
+                    border: none;
+                    color: #222325;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: 700;
+                    outline: none;
+                    padding-right: 5px;
+                }
+            }
+        }
+        .job-detail-content {
+            .card {
+                overflow: hidden;
+                border-radius: 15px;
+                box-shadow: 0 0 15px 0 rgba(167, 167, 167, 0.7411);
+                .card-body {
+                    .seller-info {
+                        display: flex;
+                        justify-content: flex-start;
+                        height: 65px;
+                        .avatar {
+                            width: 30%;
+                            img {
+                                width: 70%;
+                                border-radius: 50%;
+                                padding-top: 3px;
+                            }
+                        }
+                        .info {
+                            h5 {
+                                font-weight: 500;
+                            }
+                            p {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .card-text {
+                        .name-job {
+                            color: #222325;
+                            display: inline-block;
+                            font-size: 16px;
+                            font-weight: 500;
+                            height: 55px;
+                            line-height: 22px;
+                            transition: 0.15s ease-in-out;
+                        }
+                        .name-job:hover {
+                            color: #1dbf73;
+                        }
+                    }
+                    .rating {
+                        color: #ffbe5b;
+                        .star-rate {
+                            font-weight: 700;
+                            margin: 0 5px 0;
+                        }
+                        .rating-amount {
+                            color: #b5b6ba;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .card-footer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    background-color: #fff;
+                    padding: 10px 12px;
+                    i {
+                        color: #b5b6ba;
+                        cursor: pointer;
+                    }
+                    .price {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        p {
+                            color: #74767e;
+                            display: inline-block;
+                            font-size: 10px;
+                            font-weight: 700;
+                            letter-spacing: 0.5px;
+                            margin: 0 5px 0;
+                        }
+                        span {
+                            color: #404145;
+                            font-size: 18px;
+                            font-weight: 600;
+                            line-height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+

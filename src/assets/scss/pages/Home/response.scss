@@ -1,0 +1,58 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.responses {
+    margin-bottom: 50px;
+    .response_item {
+      gap: 10px;
+    //   .video-modal {
+    //     width: 40%;
+    //     position: relative;
+    //   }
+    .abc {
+        padding: 50px 0;
+        max-width: 50%;
+        .video-player {
+            width: 100%;
+        }
+      }
+      .response_content {
+        width: 60%;
+        .response_author {
+          h5 {
+            font-weight: 400;
+            color: #74767e;
+            margin: 0;
+          }
+          .author_logo {
+            border-left: 1px solid #c5c6c9;
+            display: inline-block;
+            height: 36px;
+            margin-left: 16px;
+            .logo-img {
+              height: 36px;
+              position: relative;
+            }
+          }
+        }
+        .response_text {
+          color: #003912;
+          font-size: 25px;
+          font-weight: 500;
+        }
+      }
+    }
+    .slick-next::before {
+        color: $c0-text-grey1;
+        margin-left: -19px;
+    }
+    .slick-prev::before {
+        color: $c0-text-grey1;
+        margin-left: 10px;
+    }
+    button {
+      scale: 1.5;
+      z-index: 1;
+    }
+}

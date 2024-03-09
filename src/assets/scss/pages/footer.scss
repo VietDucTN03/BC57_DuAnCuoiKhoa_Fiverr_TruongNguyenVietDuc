@@ -1,0 +1,117 @@
+@import "../base/base";
+@import "../themes/variable";
+@import "../components/component";
+
+.lines {
+  content: "";
+  height: 1px;
+  width: 99%;
+  background-color: #e4e5e7;
+  margin: 0 auto 40px;
+}
+.footer {
+  .footer-top {
+    .container {
+      display: flex;
+      justify-content: space-between;
+      .support {
+        margin-right: 50px;
+      }
+      .title {
+        .title-text {
+          @include text($fz-xl1, $fw-semibold, $c0-text-dark);
+        }
+      }
+      .content {
+        position: relative;
+        .content-text {
+          color: $c0-text-dark;
+          display: flex;
+          position: relative;
+          @include customAfterEffect;
+        }
+        .content-span {
+          @include text($fz-small2, $fw-regular, $c0-text-grey);
+        }
+      }
+    }
+  }
+  .lines {
+    content: "";
+    height: 2px;
+    width: 85%;
+    background-color: #e4e5e7;
+    margin: 30px auto 10px;
+  }
+  .footer-bottom {
+    .container {
+      display: flex;
+      justify-content: space-between;
+      .contactLeft {
+        .name-page {
+          @include text($fz-xl4, $fw-maxbold, $c0-text-dark);
+          .fa {
+            @include text($fz-small, $fw-light, $c0-text-grey);
+            margin: 0 -10px 0;
+          }
+          .title-contact {
+            @include text($fz-base, $fw-regular, $c0-text-grey);
+            margin: 0 20px 0;
+          }
+        }
+      }
+      .contactRight {
+        display: flex;
+        .iconList {
+          list-style-type: none;
+          display: flex;
+          li {
+            a {
+              display: inline-block;
+              transition: transform 0.3s ease;
+            }
+
+            &:hover a {
+              transform: scale(1.2);
+            }
+
+            .iconContact {
+              .fa-xl {
+                margin: 0 10px 0;
+                @include text($fz-xl2, $fw-regular, $c0-text-grey);
+              }
+            }
+          }
+        }
+        .event-link {
+          .english {
+            margin: 0 10px 0;
+            .english-link {
+              @include text($fz-base, $fw-regular, $c0-text-grey);
+              &:hover {
+                color: $c0-text-green;
+              }
+            }
+          }
+          .money {
+            margin: 0 10px 0;
+            .money-link {
+              @include text($fz-base, $fw-regular, $c0-text-grey);
+              &:hover {
+                color: $c0-text-green;
+              }
+            }
+          }
+          .fa {
+            font-size: 22px;
+            margin-right: -10px;
+            color: $c0-text-grey;
+            &:hover {
+              color: $c0-text-green;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.profile {
+    margin-top: 130px;
+  .profile-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1240px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+}

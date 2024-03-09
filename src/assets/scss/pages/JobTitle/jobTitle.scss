@@ -1,0 +1,176 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+// Banner
+.job-categories-banner {
+    height: 240px;
+    margin-bottom: 32px;
+    margin-top: 32px;
+    position: relative;
+    .banner__container {
+      background-color: #0c3b24;
+      background-image: url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/509f310d48d17eafe768a87f78d10af8-1688626459703/G_D-%20Desktop%20banner.png');
+      background-position: 50%;
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-size: cover;
+      border-radius: 10px;
+      height: 100%;
+      .banner__content {
+        color: #fff;
+        line-height: 1.2;
+        h1 {
+          font-size: 33px;
+          font-weight: 600;
+          margin: 0;
+        }
+        p {
+          font-size: 20px;
+          font-weight: 500;
+          margin: 8px 0 0;
+        }
+        button {
+          margin-top: 24px;
+          padding: 10px 16px;
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  
+  // Popular
+  .job-categories-popular {
+    h1 {
+      color: #404145;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .popular__content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 94px;
+      margin-left: -10px;
+      margin-right: -10px;
+      overflow: hidden;
+      overflow-x: scroll;
+      padding: 10px;
+      .popular__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: 0 0.14px 2.29266px rgba(0, 0, 0, 0.032),
+          0 0.37px 4.42626px rgba(0, 0, 0, 0.048), 0 3px 7px rgba(0, 0, 0, 0.09);
+        height: 100%;
+        margin-right: 12px;
+        padding: 12px;
+        img {
+          height: 100%;
+          margin-right: 9px;
+        }
+        span {
+          color: #404145;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 1.2;
+          margin-right: 9px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  
+  // Explore
+  .job-categories-explore {
+    .container {
+      .title {
+        color: #404145;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      .explore__content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-left: -10px;
+        margin-right: -10px;
+        .explore__item {
+          margin-bottom: 15px;
+          padding: 10px;
+          width: 25%;
+          img {
+            border-radius: 10px;
+            max-height: 162px;
+            width: 100%;
+          }
+          h1 {
+            color: #222325;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 20px 0;
+          }
+          p {
+            color: #62646a;
+            display: block;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 0;
+            a {
+              border-radius: 7px;
+              color: #62646a;
+              display: block;
+              margin-left: -10px;
+              padding-bottom: 10px;
+              padding-left: 10px;
+              padding-top: 10px;
+              &:hover {
+                background-color: #e2e2e2;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Services-Related
+  .services-related {
+    .container {
+      h1 {
+        color: #404145;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .services-related__content {
+        span {
+          background-color: #efeff0;
+          border-radius: 32px;
+          color: #74767e;
+          font-size: 13.5px;
+          font-weight: 700;
+          line-height: 1.2;
+          margin: 0 5px 15px;
+          padding: 8px 10px;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .job-categories-explore .container .explore__content .explore__item img {
+      height: 125px;
+    }
+  }
+  

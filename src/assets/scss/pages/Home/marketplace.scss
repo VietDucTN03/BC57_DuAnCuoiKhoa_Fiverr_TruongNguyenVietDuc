@@ -1,0 +1,29 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.marketplace {
+  margin-bottom: 50px;
+  h2 {
+    margin-bottom: 35px;
+  }
+  .marketplace_list {
+    li {
+      width: 20%;
+      padding: 0 10px 50px 10px;
+      text-align: center;
+      a {
+        color: $c0-bg-black;
+        display: inline-block;
+        position: relative;
+        img {
+          display: block;
+          width: 48px;
+          height: 48px;
+          margin: 0 auto 15px;
+        }
+        @include stretchedBorder;
+      }
+    }
+  }
+}

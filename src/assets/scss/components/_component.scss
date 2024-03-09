@@ -1,0 +1,22 @@
+@import '../themes/variable';
+
+$arr-sizing: 0rem , 0.25rem, 0.5rem,0.75rem,1rem,1.25rem;
+
+$i: 0;
+@each $item in $arr-sizing {
+    .mx-#{$i} {
+        margin-left:$item;
+        margin-right:$item;
+    }
+    .my-#{$i} {
+        margin-left:$item;
+        margin-right:$item;
+    }
+    .ms-#{$i}{
+        margin-left:$item;
+    }
+    .me-#{$i}{
+        margin-right:$item;
+    }
+    $i: $i + 1;
+} 

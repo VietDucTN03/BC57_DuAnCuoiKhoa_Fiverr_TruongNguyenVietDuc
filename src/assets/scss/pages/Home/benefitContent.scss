@@ -1,0 +1,38 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.benefit-contents {
+  background-color: #f0fdf6;
+  padding: 50px 0 40px 0;
+  margin-bottom: 50px;
+  .benefit-details {
+    .title-benefit-contents {
+      @include text($fz-xl3, $fw-bold, $c0-text-grey);
+      line-height: 120%;
+    }
+    ul {
+      li {
+        margin: 24px 0;
+        i {
+          margin-right: 10px;
+          @include text($fz-xl1, $fw-regular, $c0-text-grey1);
+          // vertical-align: middle;
+        }
+        span {
+          @include text($fz-xl1, $fw-bold, $c0-text-dark);
+        }
+        p {
+          @include text($fz-base, $fw-light, $c0-text-dark1);
+        }
+      }
+    }
+  }
+  .video-content {
+    padding: 50px 0;
+    max-width: 50%;
+    .video-player {
+        width: 100%;
+    }
+  }
+}
