@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import { Outlet } from 'react-router-dom'
 import Footer from '../pages/Footer/Footer'
 
-const HomeTemplate = () => {
+export default function UserTemplate() {
     return (
         <div>
             <Header />
@@ -15,5 +15,3 @@ const HomeTemplate = () => {
         </div>
     )
 }
-
-export default HomeTemplate

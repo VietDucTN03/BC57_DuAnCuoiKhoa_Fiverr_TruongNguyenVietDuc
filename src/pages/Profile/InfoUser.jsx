@@ -21,7 +21,7 @@ export default function InfoUser() {
       dispatch(getUserByIDAPI(userId));
     } else if (!userId) {
       alert('Vui lòng đăng nhập để truy cập trang này!');
-      history.push('/login');
+      history.push('/user/login');
     }
   }, [dispatch, userProfile]);
 

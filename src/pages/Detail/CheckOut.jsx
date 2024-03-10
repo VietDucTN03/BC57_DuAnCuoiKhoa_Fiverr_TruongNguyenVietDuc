@@ -35,7 +35,7 @@ const CheckOut = () => {
         .then((res) => {
           console.log(res);
           alert("Hire job successful!!");
-          history.push('/profile');
+          history.push('/user/profile');
         })
         .catch((error) => {
           console.log(error);
@@ -43,7 +43,7 @@ const CheckOut = () => {
         });
     } else {
       alert('Login to visit this page!');
-      history.push('/login');
+      history.push('/user/login');
     }
   }
 

@@ -84,7 +84,7 @@ export default function Login() {
                   </div>
                   <div className="col-8">
                     <h6 className='mt-3 registerNow text-success' onClick={() => {
-                      history.push('/register');
+                      history.push('/user/register');
                     }}>Register now?</h6>
                   </div>
                 </div>

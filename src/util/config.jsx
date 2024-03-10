@@ -57,13 +57,13 @@ http.interceptors.response.use((res) => {
 }, (err) => {
     if (err.response?.status === 400) {
         alert("Email already exists. Please choose another email.");
-        history.push('/register')
+        history.push('/user/register')
     } else if (err.response?.status === 401) {
         alert('Login to visit this page!')
-        history.push('/login')
+        history.push('/user/login')
     } else if (err.response?.status === 404) {
         alert("Email or password is incorrect :((");
-        history.push('/login');
+        history.push('/user/login');
     }
     return Promise.reject(err);
 })

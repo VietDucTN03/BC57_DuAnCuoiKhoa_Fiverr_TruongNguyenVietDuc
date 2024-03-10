@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import '../assets/scss/pages/header.scss';
+import '../assets/scss/pages/Header/header.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobAsyncThunkAction } from '../redux/reducers/JobReducer';
 import { ACCESS_TOKEN, TOKEN_CYBERSOFT, USER_LOGIN, USER_PROFILE } from '../util/config';
@@ -96,9 +96,10 @@ const Header = () => {
     localStorage.removeItem('tokenCyberSoft');
     localStorage.removeItem('userId');
     localStorage.removeItem(ACCESS_TOKEN);
+    // localStorage.removeItem(USER_INFO);
     localStorage.removeItem(USER_PROFILE);
     setIsLoggedIn(false);
-    history.push('/login');
+    history.push('/user/login');
   };
 
   const renderButtonProfile = () => {
@@ -106,10 +107,10 @@ const Header = () => {
       return (
         <>
           <li className="nav-item">
-            <NavLink className="nav-link" aria-disabled="true" to="/register">Register</NavLink>
+            <NavLink className="nav-link" aria-disabled="true" to="/user/register">Register</NavLink>
           </li>
           <li className="nav-item join">
-            <NavLink className="join-btn nav-link" to="/login">Join</NavLink>
+            <NavLink className="join-btn nav-link" to="/user/login">Join</NavLink>
           </li>
         </>
       )
@@ -128,7 +129,7 @@ const Header = () => {
           <div className="dropdown-menu">
             <li className="nav-item d-flex">
               <i className="fa-solid fa-user" />
-              <NavLink className="nav-link nav-profile" aria-disabled="true" to="/profile">Profile</NavLink>
+              <NavLink className="nav-link nav-profile" aria-disabled="true" to="/user/profile">Profile</NavLink>
             </li>
             <button onClick={handleLogout} className="dropdown-item logout">
               <i className="fa-solid fa-arrow-right-from-bracket" />

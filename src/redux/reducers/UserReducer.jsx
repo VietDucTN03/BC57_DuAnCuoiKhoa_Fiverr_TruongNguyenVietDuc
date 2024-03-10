@@ -30,6 +30,8 @@ const DEFAULT_STATE = {
   userList: [],
   userProfile: getStoreJson(USER_PROFILE),
   avatar: null,
+  arrUser: [],
+  userDelete: [],
 };
 
 // const stringify = localStorage.getItem('USER_INFO');
@@ -66,6 +68,12 @@ const UserReducer = createSlice({
     builder.addCase(getUserByIDAPI.fulfilled, (state, action) => {
       state.userProfile = action.payload;
     })
+    builder.addCase(getAllUserAsyncThunkAction.fulfilled, (state, action) => {
+      state.arrUser = action.payload;
+    })
+    // builder.addCase(deleteUserAsyncThunkAction.fulfilled, (state, action) => {
+    //   state.userDelete = action.payload;
+    // })
   }
 });
 
@@ -84,7 +92,7 @@ export const registerAPI = (userRegister) => {
       dispatch(action);
 
       alert("Account registered successfully <3");
-      history.push('/login');
+      history.push('/user/login');
     } catch (err) {
 
     }
@@ -104,7 +112,7 @@ export const loginAPI = (userLogin) => {
       console.log(action);
       dispatch(action);
 
-      if (history.location.pathname != '/profile') {
+      if (history.location.pathname != '/user/profile') {
         alert("Logged in successfully!!");
         history.push('/');
       }
@@ -115,42 +123,25 @@ export const loginAPI = (userLogin) => {
   }
 }
 
+export const getAllUserAsyncThunkAction = createAsyncThunk('jobReducer/getAllUserAsyncThunkAction', async () => {
+  const res = await http.get('/users');
+  return res.data.content;
+});
+
+export const deleteUserAsyncThunkAction = createAsyncThunk('jobReducer/deleteUserAsyncThunkAction', async (id) => {
+  try {
+    const res = await http.delete(`/users/?id=${id}`);
+    return res.data.content;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export const getUserByIDAPI = createAsyncThunk('userReducer/getUserByIDAPI', async (id) => {
   const res = await http.get(`/users/${id}`);
   saveStoreJson(USER_PROFILE, res.data.content);
   return res.data.content;
 }); 
-
-// export const uploadAvatarAsyncThunkAction = createAsyncThunk(
-//   'userReducer/uploadAvatarAsyncThunkAction',
-//   async ({ file }, thunkAPI) => {
-//       try {
-//           const accessToken = localStorage.getItem(ACCESS_TOKEN);
-          
-//           const formData = new FormData();
-//           formData.append('formFile', file);
-  
-//           const config = {
-//               headers: {
-//                   token: accessToken
-//               }
-//           };
-  
-//           const response = await http.post('/users/upload-avatar', formData, config);
-  
-//           // Lưu đường dẫn avatar vào store
-//           thunkAPI.dispatch(uploadAvatarAction(response.data.content));
-//           saveStoreJson(USER_PROFILE, response.data.content);
-//           alert('Update Avatar Successful!!');
-//           console.log(response.data.content);
-//           return response.data.content;
-//       } catch (err) {
-//           // Xử lý lỗi
-//           // return thunkAPI.rejectWithValue(err.response.data);
-//           console.log(err);
-//       }
-//   }
-// );
 
 export const uploadAvatarAsyncThunkAction = createAsyncThunk(
   'userReducer/uploadAvatarAsyncThunkAction',
@@ -182,23 +173,6 @@ export const uploadAvatarAsyncThunkAction = createAsyncThunk(
     }
   }
 );
-
-// export const updateProfileAPI = (updateProfile, id) => {
-//   return async dispatch => {
-//     try {
-//       await http.put(`/users/${id}`, updateProfile).then((res) => {
-//         const action = updateProfileAction(res.data.content);
-//         saveStoreJson(USER_PROFILE, res.data.content);
-//         dispatch(action);
-//         alert('Update Successful!!');
-//         console.log(action);
-//         return;
-//       })
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// }
 
 export const updateProfileAPI = (updateProfile, id) => {
   return async dispatch => {

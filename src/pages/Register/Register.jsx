@@ -159,7 +159,7 @@ export default function Register() {
               <h1>Welcome !!</h1>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, a? Nisi delectus vero eaque voluptatibus illo, numquam sequi tempore perspiciatis aperiam consequatur rem. Assumenda, explicabo.</p>
               <p>Already have an account? <span className='mt-3 loginNow text-primary' onClick={() => {
-                history.push('/login');
+                history.push('/user/login');
               }}>Click here</span></p>
             </div>
           </div>

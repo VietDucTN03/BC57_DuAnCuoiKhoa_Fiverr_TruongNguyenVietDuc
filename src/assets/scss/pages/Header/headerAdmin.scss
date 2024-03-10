@@ -1,0 +1,45 @@
+@import "../../base/base";
+@import "../../themes/variable";
+@import "../../components/component";
+
+.container {
+  .row {
+    height: 35%;
+    .menu-wrapper {
+      transition: width 0.3s ease;
+      margin-top: 5px;
+    }
+    .menu-wrapper.collapsed {
+      width: 80px;
+    }
+    .menu-wrapper:not(.collapsed) {
+      width: 200px;
+    }
+    .vertical-divider {
+      width: 1px;
+      background-color: $c0-bg-black;
+      margin: 0 10px;
+    }
+    .db {
+      width: 86%;
+      .header-left {
+        .btn {
+          margin: 0 20px 25px 0;
+        }
+        .btn:hover {
+          color: $c0-bg-button;
+          border-color: aliceblue;
+        }
+        .name-project {
+          @include text($fz-xl4, $fw-maxbold, $c0-text-dark);
+        }
+      }
+      .header-right {
+        margin-top: 11px;
+      }
+    }
+    .menu-wrapper.collapsed ~ .db {
+      width: 94%;
+    }
+  }
+}
