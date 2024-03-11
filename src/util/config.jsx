@@ -1,6 +1,7 @@
 import axios from "axios";
 import { history } from '../index';
 import { store } from '../redux/store';
+import { notification } from 'antd';
 
 export const TOKEN_CYBERSOFT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA1NyIsIkhldEhhblN0cmluZyI6IjE1LzA2LzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcxODQwOTYwMDAwMCIsIm5iZiI6MTY4ODkyMjAwMCwiZXhwIjoxNzE4NTU3MjAwfQ.vY7VplGBpsG599RYLEeMeajQNALOV5QUJ2dGV6Ow_q4';
 export const USER_REGISTER = 'userRegister';
@@ -36,15 +37,6 @@ export const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
-    // let accessToken = null;
-    // const state = store.getState();
-
-    // if (state.userReducer.userInfo) {
-    //     accessToken = state.userReducer.userInfo.token;
-
-    //     config.headers.token = accessToken;
-    // }
-    // return config;
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if (accessToken) {
         config.headers.Authorization = `${accessToken}`;
@@ -56,14 +48,23 @@ http.interceptors.response.use((res) => {
     return res;
 }, (err) => {
     if (err.response?.status === 400) {
-        alert("Email already exists. Please choose another email.");
-        history.push('/user/register')
+        notification.error({
+            message: err.response.data.content,
+            duration: 5,
+        });
+        history.push('')
     } else if (err.response?.status === 401) {
-        alert('Login to visit this page!')
+        notification.error({
+            message: err.response.data.content,
+            duration: 5,
+        });
         history.push('/user/login')
     } else if (err.response?.status === 404) {
-        alert("Email or password is incorrect :((");
-        history.push('/user/login');
+        notification.error({
+            message: err.response.data.content,
+            duration: 5,
+        });
+        history.push('');
     }
     return Promise.reject(err);
 })

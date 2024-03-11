@@ -1,22 +1,7 @@
-// import { createSlice } from '@reduxjs/toolkit'
-
-// const initialState = {
-
-// }
-
-// const UserReducer = createSlice({
-//   name: 'userReducer',
-//   initialState,
-//   reducers: {}
-// });
-
-// export const {} = UserReducer.actions
-
-// export default UserReducer.reducer
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { USER_REGISTER, ACCESS_TOKEN, getStore, http, TOKEN_CYBERSOFT, USER_LOGIN, USER_PROFILE, getStoreJson, saveStoreJson } from '../../util/config';
 import { history } from '../../index';
+import { notification } from 'antd';
 
 let userLoginDefault = {
   email: '',
@@ -32,6 +17,9 @@ const DEFAULT_STATE = {
   avatar: null,
   arrUser: [],
   userDelete: [],
+  addAdmin: [],
+  searchUser: [],
+  userByID: [],
 };
 
 // const stringify = localStorage.getItem('USER_INFO');
@@ -62,7 +50,10 @@ const UserReducer = createSlice({
     },
     updateProfileAction: (state, action) => {
       state.userProfile = action.payload;
-    },    
+    },
+    editUserACtion: (state, action) => {
+      state.userByID = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserByIDAPI.fulfilled, (state, action) => {
@@ -74,10 +65,19 @@ const UserReducer = createSlice({
     // builder.addCase(deleteUserAsyncThunkAction.fulfilled, (state, action) => {
     //   state.userDelete = action.payload;
     // })
+    builder.addCase(postUserAsyncThunkAction.fulfilled, (state, action) => {
+      state.addAdmin = action.payload;
+    })
+    builder.addCase(getSearchUserAsyncThunkAPi.fulfilled, (state, action) => {
+      state.searchUser = action.payload;
+    })
+    builder.addCase(getViewUserAPI.fulfilled, (state, action) => {
+      state.userByID = action.payload;
+    })
   }
 });
 
-export const { registerAction, loginAction, setUserInfo, reloadUser, uploadAvatarAction, updateProfileAction } = UserReducer.actions;
+export const { registerAction, loginAction, setUserInfo, reloadUser, uploadAvatarAction, updateProfileAction, editUserACtion } = UserReducer.actions;
 
 export const selectUserInfo = (state) => state.user.userInfo;
 
@@ -91,7 +91,10 @@ export const registerAPI = (userRegister) => {
       console.log(action);
       dispatch(action);
 
-      alert("Account registered successfully <3");
+      notification.success({
+        message: 'Account registered successfully!!',
+        duration: 5,
+      });
       history.push('/user/login');
     } catch (err) {
 
@@ -105,7 +108,7 @@ export const loginAPI = (userLogin) => {
       const result = await http.post('/auth/signin', userLogin);
 
       localStorage.setItem('userId', result.data.content.user.id);
-      localStorage.setItem('tokenCyberSoft', TOKEN_CYBERSOFT);  
+      localStorage.setItem('tokenCyberSoft', TOKEN_CYBERSOFT);
       localStorage.setItem(ACCESS_TOKEN, result.data.content.token);
       // localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content.user));
       const action = loginAction(result.data.content)
@@ -113,7 +116,10 @@ export const loginAPI = (userLogin) => {
       dispatch(action);
 
       if (history.location.pathname != '/user/profile') {
-        alert("Logged in successfully!!");
+        notification.success({
+          message: 'Logged in successfully!!',
+          duration: 5,
+        });
         history.push('/');
       }
 
@@ -123,12 +129,61 @@ export const loginAPI = (userLogin) => {
   }
 }
 
-export const getAllUserAsyncThunkAction = createAsyncThunk('jobReducer/getAllUserAsyncThunkAction', async () => {
+export const getAllUserAsyncThunkAction = createAsyncThunk('userReducer/getAllUserAsyncThunkAction', async () => {
   const res = await http.get('/users');
   return res.data.content;
 });
 
-export const deleteUserAsyncThunkAction = createAsyncThunk('jobReducer/deleteUserAsyncThunkAction', async (id) => {
+export const postUserAsyncThunkAction = createAsyncThunk(
+  'userReducer/postUserAsyncThunkAction',
+  async (values) => {
+    try {
+      const user = {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        phone: values.phone,
+        role: "ADMIN",
+      };
+
+      const res = await http.post('/users', user);
+      console.log(res.data.content);
+      return res.data.content;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+export const getSearchUserAsyncThunkAPi = createAsyncThunk('userReducer/getSearchUserAsyncThunkAPi', async (keyword) => {
+  const res = await http.get(`/users/search/${keyword}`);
+  return res.data.content;
+});
+
+export const getViewUserAPI = createAsyncThunk('userReducer/getViewUserAPI', async (id) => {
+  const res = await http.get(`/users/${id}`);
+  return res.data.content;
+});
+
+export const putEditUserAPI = (editUser, id) => {
+  return async dispatch => {
+    try {
+      const response = await http.put(`/users/${id}`, editUser);
+
+      dispatch(editUserACtion(response.data.content));
+      notification.success({
+        message: 'Cập nhật User thành công!!',
+        duration: 5,
+      });
+      console.log(response.data.content);
+      return response.data.content;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const deleteUserAsyncThunkAction = createAsyncThunk('userReducer/deleteUserAsyncThunkAction', async (id) => {
   try {
     const res = await http.delete(`/users/?id=${id}`);
     return res.data.content;
@@ -141,14 +196,14 @@ export const getUserByIDAPI = createAsyncThunk('userReducer/getUserByIDAPI', asy
   const res = await http.get(`/users/${id}`);
   saveStoreJson(USER_PROFILE, res.data.content);
   return res.data.content;
-}); 
+});
 
 export const uploadAvatarAsyncThunkAction = createAsyncThunk(
   'userReducer/uploadAvatarAsyncThunkAction',
   async ({ file }, thunkAPI) => {
     try {
       const accessToken = localStorage.getItem(ACCESS_TOKEN);
-      
+
       const formData = new FormData();
       formData.append('formFile', file);
 
@@ -160,11 +215,12 @@ export const uploadAvatarAsyncThunkAction = createAsyncThunk(
 
       const response = await http.post('/users/upload-avatar', formData, config);
 
-      // Dispatch action để cập nhật dữ liệu mới vào store
       thunkAPI.dispatch(uploadAvatarAction(response.data.content));
       saveStoreJson(USER_PROFILE, response.data.content);
-      // Hiển thị thông báo thành công và cập nhật dữ liệu ngay tại đây
-      alert('Cập nhật ảnh đại diện thành công!!');
+      notification.success({
+        message: 'Cập nhật ảnh đại diện thành công!!',
+        duration: 5,
+      });
       console.log(response.data.content);
 
       return response.data.content;
@@ -179,21 +235,16 @@ export const updateProfileAPI = (updateProfile, id) => {
     try {
       const response = await http.put(`/users/${id}`, updateProfile);
 
-      // Dispatch action để cập nhật dữ liệu mới vào store
       dispatch(updateProfileAction(response.data.content));
       saveStoreJson(USER_PROFILE, response.data.content);
-      // Hiển thị thông báo thành công và cập nhật dữ liệu ngay tại đây
-      alert('Cập nhật thông tin cá nhân thành công!!');
+      notification.success({
+        message: 'Cập nhật thông tin thành công!!',
+        duration: 5,
+      });
       console.log(response.data.content);
-
+      return response.data.content;
     } catch (err) {
       console.log(err);
     }
   }
 }
-
-
-
-
-
-

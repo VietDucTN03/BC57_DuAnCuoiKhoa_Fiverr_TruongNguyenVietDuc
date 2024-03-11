@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserByIDAPI, updateProfileAPI, uploadAvatarAsyncThunkAction } from '../../redux/reducers/UserReducer';
 import { history } from '../../index';
 import { NavLink } from 'react-router-dom';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import { useFormik } from 'formik';
 import unknownAvatar from '../../assets/image/Avatar.jpg';
 
@@ -20,7 +20,10 @@ export default function InfoUser() {
     if (!userProfile && userId) {
       dispatch(getUserByIDAPI(userId));
     } else if (!userId) {
-      alert('Vui lòng đăng nhập để truy cập trang này!');
+      notification.error({
+        message: 'Vui lòng đăng nhập để vào trang!!',
+        duration: 5,
+      });
       history.push('/user/login');
     }
   }, [dispatch, userProfile]);

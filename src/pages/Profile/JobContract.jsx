@@ -3,7 +3,7 @@ import '../../assets/scss/pages/Profile/jobContract.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteHiredJobAsyncThunkAction, getHiredJobAsyncThunkAction } from '../../redux/reducers/JobReducer';
 import { useNavigate } from 'react-router-dom';
-import { Pagination } from 'antd';
+import { Pagination, notification } from 'antd';
 
 export default function JobContract() {
 
@@ -33,6 +33,10 @@ export default function JobContract() {
                 .then(() => {
                     // Refresh the list of hired jobs after deletion
                     dispatch(getHiredJobAsyncThunkAction());
+                    notification.success({
+                        message: 'Delete job successfull!!',
+                        duration: 5,
+                    });
                 })
                 .catch((error) => {
                     console.error('Error deleting job:', error);
@@ -103,9 +107,9 @@ export default function JobContract() {
                 </div>
             </div>
             <div className="gigs__bottom">{renderJobList()}</div>
-            <Pagination 
-                defaultCurrent={1} 
-                total={arrHiredJob.length} 
+            <Pagination
+                defaultCurrent={1}
+                total={arrHiredJob.length}
                 pageSize={jobsPerPage}
                 onChange={handleChangePage}
             />

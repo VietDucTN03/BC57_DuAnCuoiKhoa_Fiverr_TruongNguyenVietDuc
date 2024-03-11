@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { getJobDetailByIAsyncThunkDAPI, hireJobAPI, hireJobAsyncThunkAction } from '../../redux/reducers/JobReducer';
-import { Tabs } from 'antd';
+import { Tabs, notification } from 'antd';
 
 import '../../assets/scss/pages/Detail/checkOut.scss'
 import { getUserByIDAPI } from '../../redux/reducers/UserReducer';
@@ -34,15 +34,20 @@ const CheckOut = () => {
       dispatch(hireJobAsyncThunkAction(body))
         .then((res) => {
           console.log(res);
-          alert("Hire job successful!!");
+          notification.success({
+            message: 'Hire job successful!!',
+            duration: 5,
+          });
           history.push('/user/profile');
         })
         .catch((error) => {
           console.log(error);
-          // Xử lý lỗi khi hire job không thành công
         });
     } else {
-      alert('Login to visit this page!');
+      notification.error({
+        message: 'Login to visit this page!',
+        duration: 5,
+      });
       history.push('/user/login');
     }
   }
