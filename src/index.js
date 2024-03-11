@@ -24,6 +24,9 @@ import UserTemplate from "./templates/UserTemplate";
 import Admin from "./pages/Admin/Admin";
 import AdminTemplate from "./templates/AdminTemplate";
 import UserManagement from "./pages/Admin/TableContent/UserManagement";
+import JobManagement from "./pages/Admin/TableContent/JobManagement";
+import JobTypeManagement from "./pages/Admin/TableContent/JobTypeManagement";
+import ServiceManagement from "./pages/Admin/TableContent/ServiceManagement";
 
 export const history = createBrowserHistory();
 
@@ -47,6 +50,9 @@ root.render(
         </Route>
         <Route path="admin" element={<AdminTemplate/>}>
           <Route path="user-management" element={<UserManagement/>}/>
+          <Route path="job-management" element={<JobManagement/>}/>
+          <Route path="job-type-management" element={<JobTypeManagement/>}/>
+          <Route path="service-management" element={<ServiceManagement/>}/>
         </Route>
       </Routes>
     </HistoryRouter>

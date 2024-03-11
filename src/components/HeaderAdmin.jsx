@@ -16,21 +16,21 @@ import {
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { NavLink, Outlet } from 'react-router-dom';
-function getItem(label, key, icon, children, type) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        type,
-    };
-}
-const items = [
-    getItem('Manager User', '1', <PieChartOutlined />),
-    getItem('Manager Job', '2', <DesktopOutlined />),
-    getItem('Manager JobType', '3', <ContainerOutlined />),
-    getItem('Manager Service', '4', <MailOutlined />),
-];
+// function getItem(label, key, icon, children, type) {
+//     return {
+//         key,
+//         icon,
+//         children,
+//         label,
+//         type,
+//     };
+// }
+// const items = [
+//     getItem('Manager User', '1', <PieChartOutlined />),
+//     getItem('Manager Job', '2', <DesktopOutlined />),
+//     getItem('Manager JobType', '3', <ContainerOutlined />),
+//     getItem('Manager Service', '4', <MailOutlined />),
+// ];
 
 export default function HeaderAdmin() {
 
@@ -107,10 +107,22 @@ export default function HeaderAdmin() {
                             mode="inline"
                             theme="light"
                             inlineCollapsed={collapsed}
-                            items={items}
-                        />
+                        >
+                            <Menu.Item key="1" icon={<PieChartOutlined />}>
+                                <NavLink to="/admin/user-management">Manager User</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="2" icon={<DesktopOutlined />}>
+                                <NavLink to="/admin/job-management">Manager Job</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="3" icon={<ContainerOutlined />}>
+                                <NavLink to="/admin/job-type-management">Manager JobType</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="4" icon={<MailOutlined />}>
+                                <NavLink to="/admin/service-management">Manager Service</NavLink>
+                            </Menu.Item>
+                        </Menu>
                     </div>
-                    <div className="vertical-divider"></div>
+                    {/* <div className="vertical-divider"></div> */}
                     <section className={`db row ${collapsed ? 'collapsed' : ''}`}>
                         <header className='d-flex justify-content-between'>
                             <div className="header-left">

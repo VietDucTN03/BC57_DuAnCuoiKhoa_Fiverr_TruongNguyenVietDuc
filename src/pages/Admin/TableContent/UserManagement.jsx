@@ -159,7 +159,7 @@ export default function UserManagement() {
   }, [dispatch]);
 
   const handleDeleteUser = (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this job?');
+    const confirmed = window.confirm('Are you sure you want to delete this user?');
     if (confirmed) {
       dispatch(deleteUserAsyncThunkAction(id))
         .then(() => {
@@ -235,14 +235,14 @@ export default function UserManagement() {
     },
   ];
   const data = [];
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      name: `Edward ${i}`,
-      age: 32,
-      address: `London Park no. ${i}`,
-    });
-  }
+  // for (let i = 0; i < 100; i++) {
+  //   data.push({
+  //     key: i,
+  //     name: `Edward ${i}`,
+  //     age: 32,
+  //     address: `London Park no. ${i}`,
+  //   });
+  // }
 
   return (
     <div className='container'>
