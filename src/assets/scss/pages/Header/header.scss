@@ -2,76 +2,22 @@
 @import "../../themes/variable";
 @import "../../components/component";
 
-@media (max-width: 720px) {
-  .navbar {
-    background-color: white;
-    #navbarTogglerDemo01 {
-      background-color: white;
-      height: 220px;
-      margin: 10px -12px 0;
-      .navbar-brand.scrolled {
-        transition: margin-top 0.3s;
-        @include text($fz-xl4, $fw-maxbold, $c0-text-dark);
-      }
-      .navbar-brand {
-        transition: margin-top 0.3s;
-        @include text($fz-xl4, $fw-maxbold, $c0-text-dark);
-      }
-      .header-search.scrolled {
-        transition: margin-top 0.3s;
-      }
-      .header-search {
-        transition: margin-top 0.3s;
-        .search {
-          .input-group {
-            .input-group-append {
-              .btn {
-                border-radius: 0 0.375rem 0.375rem 0;
-              }
-            }
-          }
-        }
-      }
-      .header-search.hidden {
-        display: none;
-      }
-      .navbar-nav.scrolled {
-        transition: margin-top 0.3s;
-        .nav-item {
-          .nav-link {
-            @include text($fz-base, $fw-semibold, $c0-text-dark);
-          }
-          .join-btn {
-            @include bg(
-              $c0-text-dark,
-              $fw-semibold,
-              $c0-bg-transparent,
-              1px solid $c0-bg-black
-            );
-            border-radius: 10px;
-            width: 5%;
-          }
-        }
-      }
-      .navbar-nav {
-        margin-left: 0px;
-        transition: margin-top 0.3s;
-        .nav-item {
-          .nav-link {
-            @include text($fz-base, $fw-semibold, $c0-text-dark);
-          }
-          .join-btn {
-            @include bg(
-              $c0-text-dark,
-              $fw-semibold,
-              $c0-bg-transparent,
-              1px solid $c0-bg-black
-            );
-            border-radius: 10px;
-            width: 5%;
-          }
-        }
-      }
+@media (max-width: 1080px) {
+  .Menu-zoom-out {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    // background-color: white;
+    height: 70px;
+    padding: 10px;
+    .button-showMenu {
+      width: 90px;
+      height: 50px;
+    }
+    .drawer-menu-header {
+      z-index: 9999;
     }
   }
 }
@@ -114,7 +60,6 @@
           display: none;
         }
         .navbar-nav.scrolled {
-          // margin-left: 740px;
           margin-left: 46%;
           transition: margin-top 0.3s;
           .nav-item {
@@ -122,18 +67,20 @@
               @include text($fz-base, $fw-semibold, $c0-text-dark);
             }
             .join-btn {
-              @include bg(
-                $c0-text-dark,
-                $fw-semibold,
-                $c0-bg-transparent,
-                1px solid $c0-bg-black
+              @include button(
+                $fz-base,
+                $fw-medium,
+                $c0-text-light1,
+                $c0-bg-button,
+                none,
+                #157347,
+                $c0-text-light
               );
-              border-radius: 10px;
+              border-radius: 15px;
             }
           }
         }
         .navbar-nav {
-          // margin-left: 1018px;
           margin-left: 69%;
           transition: margin-top 0.3s;
           .nav-item {
@@ -146,7 +93,7 @@
               margin-left: 16px;
             }
             .nav-profile {
-              color: #1d1d1d;
+              color: $c0-text-dark;
               padding-left: 2px;
             }
             .join-btn {
@@ -172,12 +119,12 @@
 
 .show-user {
   .dropdown-menu .dropdown-item {
-    color: #1d1d1d;
+    color: $c0-text-dark;
   }
   .user-profile {
     display: flex;
     align-items: center;
-    color: #74767e;
+    color: $c0-text-grey;
     border-left: 1px solid #b4b4b4;
     transition: all 0.5s ease;
     &:hover {
@@ -214,32 +161,29 @@
       margin-right: 5px;
     }
     .logout i {
-      color: red;
+      color: $c0-text-red;
     }
     .profile i {
-      color: #1740d4;
+      color: $c0-text-dark;
     }
   }
 }
 
 // CATEGORIES-MENU
 .job-menu {
-  background-color: #fff;
-  border-bottom: 1px solid #e4e5e7;
+  background-color: $c0-text-light1;
+  border-bottom: 1px solid $c0-text-light;
   transition: all 0.5s ease;
   display: none;
   left: 0;
   position: fixed;
   right: 0;
   top: 81px;
-  // z-index: 990;
   .menu-job {
-    background-color: #fff;
+    background-color: $c0-text-light1;
     width: 100%;
-    border-bottom: 1px solid #e4e5e7;
+    border-bottom: 1px solid $c0-text-light;
     padding: 0 30px;
-    // display: none;
-    // display: block;
     .job {
       display: flex;
       flex-wrap: wrap;
@@ -259,28 +203,13 @@
       text-decoration: none;
       position: relative;
       width: max-content;
-      &::after {
-        content: "";
-        background: #1dbf73;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 3px;
-        transition: all 0.3s;
-        width: 0;
-        z-index: 1;
-      }
-      &:hover {
-        color: #1dbf73;
-        &::after {
-          width: 100%;
-        }
-      }
+      @include customAfterEffect;
+      margin-bottom: 5px;
     }
     .job-item-detail {
-      background-color: #fff;
-      border: 1px solid #e4e5e7;
-      box-shadow: 0 1px 3px #dadbdd;
+      background-color: $c0-text-light1;
+      border: 1px solid $c0-text-light;
+      box-shadow: 0 1px 3px $c0-bg-light3;
       display: none;
       padding: 20px 30px;
       text-align: left;
@@ -293,21 +222,17 @@
       }
     }
     .job-title {
-      color: #404145;
-      font-size: 16px;
-      font-weight: 600;
+      @include text($fz-base, $fw-semibold, $c0-text-dark2);
       margin: 0;
       padding: 8px 0;
     }
     .job-detail a {
-      color: #62646a;
-      font-size: 16px;
-      font-weight: 400;
+      @include text($fz-base, $fw-regular, $c0-text-grey1);
       margin: 0 0 5px;
       padding: 0;
       text-decoration: none;
       &:hover {
-        color: #1dbf73;
+        color: $c0-bg-button;
       }
     }
   }
@@ -317,7 +242,7 @@
   top: 65px;
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: $c0-text-light1;
   z-index: 999;
   display: block;
 }

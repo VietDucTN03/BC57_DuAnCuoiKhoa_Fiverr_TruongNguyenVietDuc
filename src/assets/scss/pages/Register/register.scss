@@ -3,27 +3,84 @@
 @import "../../components/component";
 
 .page-register {
-    padding: 130px 0 50px;
-    background-color: #f5f5f5;
-    .register {
-        width: 75%;
-        background: #fff;
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        border-radius: 20px;
-        box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-        margin: 0 auto;
-        .container {
-            margin-top: 50px;
-            padding: 0 50px;
-            .input-left {
-                .form-group {
-                    display: flex;
-                }
-            }
-    
-            .input-right {
-    
-            }
+  padding: 106px 0 50px;
+  background-color: #f5f5f5;
+  .register {
+    width: 75%;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+    .container {
+      margin-top: 50px;
+      padding: 0 50px;
+      .input-left {
+        .title-signup {
+          @include text($fz-xl3, $fw-semibold, $c0-text-green1);
         }
+        .form-group {
+          display: flex;
+          // align-items: center;
+          .fa {
+            font-size: 20px;
+            line-height: 40px;
+          }
+          .form-input {
+            width: 85%;
+            height: 50px;
+            .form-control {
+              margin-left: 10px;
+            }
+            .invalid-feedback {
+              margin-left: 10px;
+            }
+          }
+          section {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            p {
+              margin: 0 10px 0 10px;
+            }
+          }
+        }
+        .btn-register {
+          @include button(
+            $fz-base,
+            $fw-medium,
+            $c0-text-light1,
+            $c0-bg-button,
+            none,
+            #157347,
+            $c0-text-light
+          );
+          border-radius: 45px;
+          height: 43px;
+          text-transform: uppercase;
+          transition: all 0.3s ease-in-out;
+          width: 90px;
+          margin-bottom: 30px;
+        }
+      }
+
+      .input-right {
+        .title-background {
+          .p-login {
+            margin-top: 10px;
+            @include text($fz-base, $fw-regular, $c0-text-grey);
+            .loginNow {
+              @include text($fz-xl, $fw-medium, $c0-text-green1);
+              font-style: italic;
+              cursor: pointer;
+              transition: color 0.3s;
+            }
+            .loginNow:hover {
+              color: $c0-bg-button;
+            }
+          }
+        }
+      }
     }
+  }
 }

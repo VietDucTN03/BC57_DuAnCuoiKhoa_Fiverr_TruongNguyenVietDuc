@@ -36,6 +36,24 @@
       }
       .header-right {
         margin-top: 11px;
+        .nav-item {
+          line-height: 30px;
+          .nav-link {
+            @include text($fz-base, $fw-semibold, $c0-text-light);
+          }
+          .fa-user {
+            line-height: 45px;
+            margin-left: 16px;
+          }
+          .nav-profile {
+            color: #1d1d1d;
+            padding: 8px 2px 0 2px;
+          }
+          .join-btn {
+            @include bg($c0-text-light, $fw-semibold, $c0-bg-transparent);
+            border-radius: 10px;
+          }
+        }
       }
     }
     .menu-wrapper.collapsed ~ .db {

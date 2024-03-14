@@ -2,9 +2,9 @@ import React from 'react';
 import "../../assets/scss/pages/Footer/footer.scss";
 
 export default function Footer() {
-  return (
-    <div>
-        <footer class="footer">
+    return (
+        <div>
+            <footer class="footer container">
                 <div className="footer-top">
                     <div className="container">
                         <div className="categories">
@@ -12,16 +12,36 @@ export default function Footer() {
                                 <h1 className="title-text">Categories</h1>
                             </div>
                             <div className="content">
-                                <a href="#" className="content-text mt-3">Graphics &amp; Design</a>
-                                <a href="#" className="content-text mt-3">Digital Marketing</a>
-                                <a href="#" className="content-text mt-3">Writing &amp; Translation</a>
-                                <a href="#" className="content-text mt-3">Video &amp; Animation</a>
-                                <a href="#" className="content-text mt-3">Music &amp; Audio</a>
-                                <a href="#" className="content-text mt-3">Programming &amp; Tech</a>
-                                <a href="#" className="content-text mt-3">Data</a>
-                                <a href="#" className="content-text mt-3">Business</a>
-                                <a href="#" className="content-text mt-3">Lifestyle</a>
-                                <a href="#" className="content-text mt-3">Sitemap</a>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Graphics &amp; Design</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Digital Marketing</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Writing &amp; Translation</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Video &amp; Animation</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Music &amp; Audio</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Programming &amp; Tech</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Data</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Business</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Lifestyle</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Sitemap</a>
+                                </div>
                             </div>
                         </div>
                         <div className="line" />
@@ -30,13 +50,27 @@ export default function Footer() {
                                 <h1 className="title-text">About</h1>
                             </div>
                             <div className="content">
-                                <a href="#" className="content-text mt-3">Careers</a>
-                                <a href="#" className="content-text mt-3">Press &amp; News</a>
-                                <a href="#" className="content-text mt-3">Partnerships</a>
-                                <a href="#" className="content-text mt-3">Privacy Policy</a>
-                                <a href="#" className="content-text mt-3">Terms of Service</a>
-                                <a href="#" className="content-text mt-3">Intellectual Property Claims</a>
-                                <a href="#" className="content-text mt-3">Investor Relations</a>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Careers</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Press &amp; News</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Partnerships</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Privacy Policy</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Terms of Service</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Intellectual Property Claims</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Investor Relations</a>
+                                </div>
                             </div>
                         </div>
                         <div className="line" />
@@ -45,10 +79,18 @@ export default function Footer() {
                                 <h1 className="title-text">Support</h1>
                             </div>
                             <div className="content">
-                                <a href="#" className="content-text mt-3">Help &amp; Support</a>
-                                <a href="#" className="content-text mt-3">Trust &amp; Safety</a>
-                                <a href="#" className="content-text mt-3">Selling on Fiverr</a>
-                                <a href="#" className="content-text mt-3">Buying on Fiverr</a>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Help &amp; Support</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Trust &amp; Safety</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Selling on Fiverr</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Buying on Fiverr</a>
+                                </div>
                             </div>
                         </div>
                         <div className="community">
@@ -56,16 +98,36 @@ export default function Footer() {
                                 <h1 className="title-text">Community</h1>
                             </div>
                             <div className="content">
-                                <a href="#" className="content-text mt-3">Events</a>
-                                <a href="#" className="content-text mt-3">Blog</a>
-                                <a href="#" className="content-text mt-3">Forum</a>
-                                <a href="#" className="content-text mt-3">Community Standards</a>
-                                <a href="#" className="content-text mt-3">Podcast</a>
-                                <a href="#" className="content-text mt-3">Affiliates</a>
-                                <a href="#" className="content-text mt-3">Invite a Friend</a>
-                                <a href="#" className="content-text mt-3">Become a Seller</a>
-                                <a href="#" className="content-text mt-3">Fiverr Elevate</a>
-                                <a href="#"><span className='content-span'>Exclusive Benefits</span></a>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Events</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Blog</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Forum</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Community Standards</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Podcast</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Affiliates</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Invite a Friend</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Become a Seller</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Elevate</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#"><span className='content-span'>Exclusive Benefits</span></a>
+                                </div>
                             </div>
                         </div>
                         <div className="line" />
@@ -74,18 +136,42 @@ export default function Footer() {
                                 <h1 className="title-text">More From Fiverr</h1>
                             </div>
                             <div className="content">
-                                <a href="#" className="content-text mt-3">Fiverr Business</a>
-                                <a href="#" className="content-text mt-3">Fiverr Pro</a>
-                                <a href="#" className="content-text mt-3">Fiverr Studios</a>
-                                <a href="#" className="content-text mt-3">Fiverr Logo Maker</a>
-                                <a href="#" className="content-text mt-3">Fiverr Guides</a>
-                                <a href="#" className="content-text mt-3">Get Inspired</a>
-                                <a href="#" className="content-text mt-3">ClearVoice</a>
-                                <a href="#"><span className='content-span'>Conetnt Marketing</span></a>
-                                <a href="#" className="content-text mt-3">AND CO</a>
-                                <a href="#"><span className='content-span'>Invoice Software</span></a>
-                                <a href="#" className="content-text mt-3">Learn</a>
-                                <a href="#"><span className='content-span'>Online Courses</span></a>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Business</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Pro</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Studios</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Logo Maker</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Fiverr Guides</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Get Inspired</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">ClearVoice</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#"><span className='content-span'>Conetnt Marketing</span></a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">AND CO</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#"><span className='content-span'>Invoice Software</span></a>
+                                </div>
+                                <div className="a">
+                                    <a href="#" className="content-text mt-3">Learn</a>
+                                </div>
+                                <div className="a">
+                                    <a href="#"><span className='content-span'>Online Courses</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -152,6 +238,6 @@ export default function Footer() {
                     </div>
                 </div>
             </footer>
-    </div>
-  )
+        </div>
+    )
 }

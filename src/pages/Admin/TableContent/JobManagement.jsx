@@ -3,12 +3,13 @@ import { Modal, Table, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteJobAsyncThunkAction, getJobAsyncThunkAction, getViewJobAPI, postJobAsyncThunkAction, putEditJobAPI, uploadImgJobAsyncThunkAction } from '../../../redux/reducers/JobReducer';
 import { useFormik } from 'formik';
+import '../../../assets/scss/pages/Admin/jobManagement.scss'
 
 export default function JobManagement() {
 
   const dispatch = useDispatch();
   const arrJobManage = useSelector((state) => state.jobReducer.arrJobManage);
-  console.log(arrJobManage);
+  // console.log(arrJobManage);
 
   //GET ALL JOB
   useEffect(() => {
@@ -135,7 +136,7 @@ export default function JobManagement() {
 
   //UPDATE JOB
   const jobByID = useSelector((state) => state.jobReducer.jobByID);
-  console.log(jobByID);
+  // console.log(jobByID);
 
   const formUpdate = useFormik({
     enableReinitialize: true,
@@ -226,7 +227,7 @@ export default function JobManagement() {
   const columns = [
     {
       title: 'ID',
-      width: 35,
+      width: 50,
       dataIndex: 'id',
       key: 'id',
     },
@@ -267,22 +268,22 @@ export default function JobManagement() {
       title: 'Rate',
       dataIndex: 'danhGia',
       key: '4',
-      width: 50,
+      width: 40,
     },
     {
       title: 'Action',
       key: 'operation',
       fixed: 'right',
-      width: 90,
+      width: 125,
       render: (record) => (
         <div className='buttonEvent'>
-          <button className='btn btn-danger border-0 shadow'
+          <button className='btn btn-success border-0 shadow'
             onClick={() => handleImgJob(record.id)}
           >IMAGE JOB</button>
-          <button className='btn button-edit border-0 shadow'
+          <button className='btn btn-primary button-edit border-0 shadow mt-2'
             onClick={() => handleEditJob(record.id)}
           >VIEW & EDIT</button>
-          <button className='btn btn-danger border-0 shadow'
+          <button className='btn btn-danger border-0 shadow mt-2'
             onClick={() => handleDeleteJob(record.id)}
           >DELETE</button>
         </div>
@@ -301,34 +302,22 @@ export default function JobManagement() {
 
   return (
     <div className='container'>
-      <h2>QUẢN LÝ CÔNG VIỆC</h2>
+      <h2 className='title'>QUẢN LÝ CÔNG VIỆC</h2>
       <br />
       <div role="tabpanel" className="tab-pane in active">
         <div className="row">
           <div
-            className="col-8 d-flex justify-content-end "
+            className="col-4 d-flex justify-content-end "
             style={{ height: 40, marginBottom: "16px" }}
           >
-            {/* BEGIN BUTTOM THÊM MỚI */}
             <button
               id="btnAddUser"
               className="btn btn-success mr-auto"
-              // data-toggle="modal"
-              // data-target="#myModal"
               onClick={() => setVisibleAdd(true)}
             >
-              <i className="fa fa-plus mr-1" /> ADD NEW JOB
+              <i className="fa fa-plus" /> ADD NEW JOB
             </button>
-            {/* END BUTTON THÊM MỚI */}
           </div>
-          {/* <div className="col-12 form-group has-search mt-16">
-            <div className="form-group mb-0">
-              <div className="row">
-                <div className="col-9">
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="clear-fix" />
         <div>
@@ -352,78 +341,110 @@ export default function JobManagement() {
         onCancel={handleCancelAdd}
         footer={null}
       >
-        <form className='container'
+        <form className='container form-add'
           onSubmit={formAdd.handleSubmit}
         >
-          <hr />
           <div className="row container">
-            <div className=" col-xl-3 col-xs-12 text-center">
-            </div>
-            <div className="input-left col-4">
+            <div className="input-left col-6">
               <div className="form-group mt-3">
                 <label htmlFor="tenCongViec">New Job</label>
-                <input type="text" className='form-control bg-light' placeholder='New Job' name='tenCongViec'
-                  value={formAdd.values.tenCongViec} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.tenCongViec && formAdd.errors.tenCongViec ? (
-                  <div className="error-message text-danger">{formAdd.errors.tenCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.tenCongViec && formAdd.touched.tenCongViec ? 'is-invalid' : ''}`}
+                    id="tenCongViec" name='tenCongViec' placeholder="Name Job" value={formAdd.values.tenCongViec}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.tenCongViec && formAdd.touched.tenCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.tenCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="moTa">Discription</label>
-                <input type="text" className='form-control bg-light' placeholder='Discription' name='moTa'
-                  value={formAdd.values.moTa} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.moTa && formAdd.errors.moTa ? (
-                  <div className="error-message text-danger">{formAdd.errors.moTa}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.moTa && formAdd.touched.moTa ? 'is-invalid' : ''}`}
+                    id="moTa" name='moTa' placeholder="Discription" value={formAdd.values.moTa}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.moTa && formAdd.touched.moTa && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.moTa}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="form-group mt-3">
                 <label htmlFor="moTaNgan">Short Discription</label>
-                <input type="text" className='form-control bg-light' placeholder='Short Discription' name='moTaNgan'
-                  value={formAdd.values.moTaNgan} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.moTaNgan && formAdd.errors.moTaNgan ? (
-                  <div className="error-message text-danger">{formAdd.errors.moTaNgan}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.moTaNgan && formAdd.touched.moTaNgan ? 'is-invalid' : ''}`}
+                    id="moTaNgan" name='moTaNgan' placeholder="Short Discription" value={formAdd.values.moTaNgan}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.moTaNgan && formAdd.touched.moTaNgan && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.moTaNgan}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="giaTien">Price</label>
-                <input type="text" className='form-control bg-light' placeholder='Price' name='giaTien'
-                  value={formAdd.values.giaTien} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.giaTien && formAdd.errors.giaTien ? (
-                  <div className="error-message text-danger">{formAdd.errors.giaTien}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.giaTien && formAdd.touched.giaTien ? 'is-invalid' : ''}`}
+                    id="giaTien" name='giaTien' placeholder="Price" value={formAdd.values.giaTien}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.giaTien && formAdd.touched.giaTien && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.giaTien}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="input-right col-4">
-              <div className="form-group mt-4">
+            <div className="input-right col-6">
+              <div className="form-group mt-3">
                 <label htmlFor="danhGia">Rate</label>
-                <input type="text" className='form-control bg-light' placeholder='Rate' name='danhGia'
-                  value={formAdd.values.danhGia} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.danhGia && formAdd.errors.danhGia ? (
-                  <div className="error-message text-danger">{formAdd.errors.danhGia}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.danhGia && formAdd.touched.danhGia ? 'is-invalid' : ''}`}
+                    id="danhGia" name='danhGia' placeholder="Rate" value={formAdd.values.danhGia}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.danhGia && formAdd.touched.danhGia && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.danhGia}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="maChiTietLoaiCongViec">Job detail code</label>
-                <input type="text" className='form-control bg-light' placeholder='Job detail code' name='maChiTietLoaiCongViec'
-                  value={formAdd.values.maChiTietLoaiCongViec} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.maChiTietLoaiCongViec && formAdd.errors.maChiTietLoaiCongViec ? (
-                  <div className="error-message text-danger">{formAdd.errors.maChiTietLoaiCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.maChiTietLoaiCongViec && formAdd.touched.maChiTietLoaiCongViec ? 'is-invalid' : ''}`}
+                    id="maChiTietLoaiCongViec" name='maChiTietLoaiCongViec' placeholder="Job detail code" value={formAdd.values.maChiTietLoaiCongViec}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.maChiTietLoaiCongViec && formAdd.touched.maChiTietLoaiCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.maChiTietLoaiCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="saoCongViec">Star Ratiing</label>
-                <input type="text" className='form-control bg-light' placeholder='Star Ratiing' name='saoCongViec'
-                  value={formAdd.values.saoCongViec} onChange={formAdd.handleChange} onBlur={formAdd.handleBlur}
-                />
-                {formAdd.touched.saoCongViec && formAdd.errors.saoCongViec ? (
-                  <div className="error-message text-danger">{formAdd.errors.saoCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formAdd.handleBlur}
+                    className={`form-control ${formAdd.errors.saoCongViec && formAdd.touched.saoCongViec ? 'is-invalid' : ''}`}
+                    id="saoCongViec" name='saoCongViec' placeholder="Star Ratiing" value={formAdd.values.saoCongViec}
+                    onChange={formAdd.handleChange} />
+                  {formAdd.errors.saoCongViec && formAdd.touched.saoCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formAdd.errors.saoCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
 
               <button className='btn-update text-white mt-3 border-0 shadow' type='submit'>
@@ -440,13 +461,12 @@ export default function JobManagement() {
         onCancel={handleCancelUploadImg}
         footer={null}
       >
-        <form className='container'
+        <form className='container form-uploadImg'
           onSubmit={formAdd.handleSubmit}
         >
-          <hr />
           <div className="row container">
             <div className="form-group mt-3">
-              <input type="file" accept="image/*" onChange={(e) => handleFileImgJobChange(e, selectedJobId)} />
+              <input className='btn' type="file" accept="image/*" onChange={(e) => handleFileImgJobChange(e, selectedJobId)} />
               {/* <button className='btn-update text-white mt-3 border-0 shadow' type='submit'>
                 Update
               </button> */}
@@ -461,78 +481,110 @@ export default function JobManagement() {
         onCancel={handleCancelUpdate}
         footer={null}
       >
-        <form className='container'
+        <form className='container form-update'
           onSubmit={formUpdate.handleSubmit}
         >
-          <hr />
           <div className="row container">
-            <div className=" col-xl-3 col-xs-12 text-center">
-            </div>
-            <div className="input-left col-4">
+            <div className="input-left col-6">
               <div className="form-group mt-3">
                 <label htmlFor="tenCongViec">New Job</label>
-                <input type="text" className='form-control bg-light' placeholder='New Job' name='tenCongViec'
-                  value={formUpdate.values.tenCongViec} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.tenCongViec && formUpdate.errors.tenCongViec ? (
-                  <div className="error-message text-danger">{formUpdate.errors.tenCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.tenCongViec && formUpdate.touched.tenCongViec ? 'is-invalid' : ''}`}
+                    id="tenCongViec" name='tenCongViec' placeholder="Name Job" value={formUpdate.values.tenCongViec}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.tenCongViec && formUpdate.touched.tenCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.tenCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="moTa">Discription</label>
-                <input type="text" className='form-control bg-light' placeholder='Discription' name='moTa'
-                  value={formUpdate.values.moTa} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.moTa && formUpdate.errors.moTa ? (
-                  <div className="error-message text-danger">{formUpdate.errors.moTa}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.moTa && formUpdate.touched.moTa ? 'is-invalid' : ''}`}
+                    id="moTa" name='moTa' placeholder="Discription" value={formUpdate.values.moTa}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.moTa && formUpdate.touched.moTa && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.moTa}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="form-group mt-3">
                 <label htmlFor="moTaNgan">Short Discription</label>
-                <input type="text" className='form-control bg-light' placeholder='Short Discription' name='moTaNgan'
-                  value={formUpdate.values.moTaNgan} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.moTaNgan && formUpdate.errors.moTaNgan ? (
-                  <div className="error-message text-danger">{formUpdate.errors.moTaNgan}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.moTaNgan && formUpdate.touched.moTaNgan ? 'is-invalid' : ''}`}
+                    id="moTaNgan" name='moTaNgan' placeholder="Short Discription" value={formUpdate.values.moTaNgan}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.moTaNgan && formUpdate.touched.moTaNgan && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.moTaNgan}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="giaTien">Price</label>
-                <input type="text" className='form-control bg-light' placeholder='Price' name='giaTien'
-                  value={formUpdate.values.giaTien} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.giaTien && formUpdate.errors.giaTien ? (
-                  <div className="error-message text-danger">{formUpdate.errors.giaTien}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.giaTien && formUpdate.touched.giaTien ? 'is-invalid' : ''}`}
+                    id="giaTien" name='giaTien' placeholder="Price" value={formUpdate.values.giaTien}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.giaTien && formUpdate.touched.giaTien && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.giaTien}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="input-right col-4">
-              <div className="form-group mt-4">
+            <div className="input-right col-6">
+              <div className="form-group mt-3">
                 <label htmlFor="danhGia">Rate</label>
-                <input type="text" className='form-control bg-light' placeholder='Rate' name='danhGia'
-                  value={formUpdate.values.danhGia} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.danhGia && formUpdate.errors.danhGia ? (
-                  <div className="error-message text-danger">{formUpdate.errors.danhGia}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.danhGia && formUpdate.touched.danhGia ? 'is-invalid' : ''}`}
+                    id="danhGia" name='danhGia' placeholder="Rate" value={formUpdate.values.danhGia}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.danhGia && formUpdate.touched.danhGia && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.danhGia}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="maChiTietLoaiCongViec">Job detail code</label>
-                <input type="text" className='form-control bg-light' placeholder='Job detail code' name='maChiTietLoaiCongViec'
-                  value={formUpdate.values.maChiTietLoaiCongViec} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.maChiTietLoaiCongViec && formUpdate.errors.maChiTietLoaiCongViec ? (
-                  <div className="error-message text-danger">{formUpdate.errors.maChiTietLoaiCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.maChiTietLoaiCongViec && formUpdate.touched.maChiTietLoaiCongViec ? 'is-invalid' : ''}`}
+                    id="maChiTietLoaiCongViec" name='maChiTietLoaiCongViec' placeholder="Job detail code" value={formUpdate.values.maChiTietLoaiCongViec}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.maChiTietLoaiCongViec && formUpdate.touched.maChiTietLoaiCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.maChiTietLoaiCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="form-group mt-4">
+              <div className="form-group mt-3">
                 <label htmlFor="saoCongViec">Star Ratiing</label>
-                <input type="text" className='form-control bg-light' placeholder='Star Ratiing' name='saoCongViec'
-                  value={formUpdate.values.saoCongViec} onChange={formUpdate.handleChange} onBlur={formUpdate.handleBlur}
-                />
-                {formUpdate.touched.saoCongViec && formUpdate.errors.saoCongViec ? (
-                  <div className="error-message text-danger">{formUpdate.errors.saoCongViec}</div>
-                ) : null}
+                <div className="form-input">
+                  <input type="text" onBlur={formUpdate.handleBlur}
+                    className={`form-control ${formUpdate.errors.saoCongViec && formUpdate.touched.saoCongViec ? 'is-invalid' : ''}`}
+                    id="saoCongViec" name='saoCongViec' placeholder="Star Ratiing" value={formUpdate.values.saoCongViec}
+                    onChange={formUpdate.handleChange} />
+                  {formUpdate.errors.saoCongViec && formUpdate.touched.saoCongViec && (
+                    <div className="invalid-feedback" style={{ color: 'red' }}>
+                      {formUpdate.errors.saoCongViec}
+                    </div>
+                  )}
+                </div>
               </div>
 
               <button className='btn-update text-white mt-3 border-0 shadow' type='submit'>

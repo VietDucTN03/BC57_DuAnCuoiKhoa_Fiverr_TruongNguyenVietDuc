@@ -10,13 +10,13 @@ import unknownAvatar from '../../assets/image/Avatar.jpg';
 
 export default function InfoUser() {
 
+  const userId = localStorage.getItem('userId');
   const dispatch = useDispatch();
   const [useUserProfile, setUseUserProfile] = useState(false);
   const userInfo = useSelector((state) => state.userReducer.userInfo);
   const userProfile = useSelector((state) => state.userReducer.userProfile);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
     if (!userProfile && userId) {
       dispatch(getUserByIDAPI(userId));
     } else if (!userId) {
@@ -36,7 +36,14 @@ export default function InfoUser() {
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
-    dispatch(uploadAvatarAsyncThunkAction({ file }));
+    dispatch(uploadAvatarAsyncThunkAction({ file }))
+      .then(() => {
+        dispatch(getUserByIDAPI(userId));
+        // setSelectedFile(null);
+      })
+      .catch((error) => {
+        console.error('Error upload Avatar:', error);
+      });
   };
 
   const form = useFormik({
@@ -49,13 +56,34 @@ export default function InfoUser() {
       certification: useUserProfile ? userProfile?.certification || [] : userInfo?.certification || [],
       skill: useUserProfile ? userProfile?.skill || [] : userInfo?.skill || [],
     },
+    validate: (values) => {
+      const errors = {};
+
+      Object.keys(values).forEach((fieldName) => {
+        if (!values[fieldName]) {
+          errors[fieldName] = `${fieldName} is required`;
+        }
+      });
+
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+      }
+
+      if (!/^\d{10}$/.test(values.phone)) {
+        errors.phone = 'Phone number must be 10 numbers';
+      }
+
+      return errors;
+    },
     onSubmit: (values) => {
       const userId = localStorage.getItem('userId');
-      dispatch(updateProfileAPI({
-        ...values,
-        certification: Array.isArray(values.certification) ? values.certification : [values.certification],
-        skill: Array.isArray(values.skill) ? values.skill : [values.skill],
-      }, userId));
+      if (Object.keys(form.errors).length === 0) {
+        dispatch(updateProfileAPI({
+          ...values,
+          certification: Array.isArray(values.certification) ? values.certification : [values.certification],
+          skill: Array.isArray(values.skill) ? values.skill : [values.skill],
+        }, userId));
+      }
     }
   });
 
@@ -74,12 +102,12 @@ export default function InfoUser() {
         <div className='info'>
           <div className="info-top">
             <div className="job-detail-content">
-              <div className="row">
+              <div className="info-user">
                 <div className="info__card">
-                  <div className="info__profile">
-                    <div className="user__img">
-                      <label className="img__label">
-                        <div className="label__camera">
+                  <div className="info-profile">
+                    <div className="user-img">
+                      <label className="img-label">
+                        <div className="label-camera">
                           <i className="fa-solid fa-camera" />
                         </div>
                         <input type="file" accept="image/*" onChange={handleAvatarChange} />
@@ -92,27 +120,27 @@ export default function InfoUser() {
                         </div>
                       </label>
                     </div>
-                    <div className="user__label">
+                    <div className="user-label">
                       <p>{userProfile.email}</p>
                     </div>
                   </div>
                   <div className="desc">
-                    <div className="desc__item">
+                    <div className="desc-item">
                       <div className="left">
                         <i className="fa-solid fa-location-dot" />
                         <span>From</span>
                       </div>
                       <div className="right">
-                        <span>Vietnam</span>
+                        <span>Cybersoft</span>
                       </div>
                     </div>
-                    <div className="desc__item">
+                    <div className="desc-item">
                       <div className="left">
                         <i className="fa-solid fa-user" />
                         <span>Member since</span>
                       </div>
                       <div className="right">
-                        <span>Oct 2023</span>
+                        <span>July 2023</span>
                       </div>
                     </div>
                   </div>
@@ -123,7 +151,7 @@ export default function InfoUser() {
           <div className="info-bottom">
             <div className="info__card">
               <div className="item">
-                <div className="item__title description">
+                <div className="item-title description">
                   <h3>Description</h3>
                   <button
                     className="btn edit-btn"
@@ -146,7 +174,7 @@ export default function InfoUser() {
                 </div>
               </div>
               <div className="item">
-                <div className="item__title">
+                <div className="item-title">
                   <h3>Languages</h3>
                 </div>
                 <p>
@@ -157,7 +185,7 @@ export default function InfoUser() {
                 </p>
               </div>
               <div className="item">
-                <div className="item__title">
+                <div className="item-title">
                   <h3>Skills</h3>
                 </div>
                 <div className="badge-list d-flex flex-wrap">
@@ -165,13 +193,13 @@ export default function InfoUser() {
                 </div>
               </div>
               <div className="item">
-                <div className="item__title">
+                <div className="item-title">
                   <h3>Education</h3>
                 </div>
                 <p>CYBERSOFT</p>
               </div>
               <div className="item">
-                <div className="item__title">
+                <div className="item-title">
                   <h3>Certification</h3>
                 </div>
                 <div className="badge-list d-flex flex-wrap">
@@ -179,43 +207,43 @@ export default function InfoUser() {
                 </div>
               </div>
               <div className="item" style={{ border: 'none' }}>
-                <div className="item__title">
+                <div className="item-title">
                   <h3>Linked Accounts</h3>
                 </div>
-                <ul className="mt-2">
+                <ul className="mt-2 link-path">
                   <li>
                     <i className="fa-brands fa-facebook" />
-                    <NavLink target="_blank" to={'https://www.facebook.com/'}>
+                    <NavLink target="_blank" className='name-path' to={'https://www.facebook.com/'}>
                       Facebook
                     </NavLink>
                   </li>
                   <li>
                     <i className="fa-brands fa-google" />
-                    <NavLink target="_blank" to={'https://www.google.com.vn/'}>
+                    <NavLink target="_blank" className='name-path' to={'https://www.google.com.vn/'}>
                       Google
                     </NavLink>
                   </li>
                   <li>
                     <i className="fa-brands fa-github" />
-                    <NavLink target="_blank" to={'https://github.com/'}>
+                    <NavLink target="_blank" className='name-path' to={'https://github.com/'}>
                       Github
                     </NavLink>
                   </li>
                   <li>
                     <i className="fa-brands fa-twitter" />
-                    <NavLink to={'https://twitter.com/?lang=vi'} target="_blank">
+                    <NavLink to={'https://twitter.com/?lang=vi'} target="_blank" className='name-path'>
                       Twitter
                     </NavLink>
                   </li>
                   <li>
                     <i className="fa-brands fa-dribbble" />
-                    <NavLink target="_blank" to={'https://dribbble.com/'}>
+                    <NavLink target="_blank" className='name-path' to={'https://dribbble.com/'}>
                       Dribble
                     </NavLink>
                   </li>
                   <li>
                     <i className="fa-brands fa-stack-overflow" />
-                    <NavLink target="_blank" to={'https://stackoverflow.com/'}>
+                    <NavLink target="_blank" className='name-path' to={'https://stackoverflow.com/'}>
                       Stack Overflow
                     </NavLink>
                   </li>
@@ -229,37 +257,77 @@ export default function InfoUser() {
             onCancel={handleCancel}
             footer={null}
           >
-            <form className='container' onSubmit={form.handleSubmit}>
-              <hr />
-              <div className="row container">
-                <div className=" col-xl-3 col-xs-12 text-center">
-                </div>
-                <div className="input-left col-4">
+            <form className='form-update container' onSubmit={form.handleSubmit} style={{ display: 'block' }}>
+              <div className="row">
+                {/* <div className=" col-xl-3 col-xs-12 text-center">
+                </div> */}
+                <div className="input-left col-6">
                   <div className="form-group mt-3">
                     <label htmlFor="email">Email</label>
-                    <input type="text" className='form-control bg-light' placeholder='email' name='email' value={userProfile.email} onChange={form.handleChange} />
+                    <input type="text" className='form-control bg-light' placeholder='email' name='email' value={userProfile.email} onChange={form.handleChange} disabled />
                   </div>
-                  <div className="form-group mt-4">
+                  <div className="form-group mt-3">
                     <label htmlFor="phone">Phone</label>
-                    <input type="text" className='form-control bg-light' placeholder='phone' name='phone' value={phone} onChange={form.handleChange} />
+                    {/* <input type="text" className='form-control bg-light' placeholder='phone' name='phone' value={phone} onChange={form.handleChange} /> */}
+                    <div className="form-input">
+                      <input type="text" onBlur={form.handleBlur}
+                        className={`form-control ${form.errors.phone && form.touched.phone ? 'is-invalid' : ''}`} value={phone}
+                        id="phone" name='phone' placeholder="Phone"
+                        onChange={form.handleChange} />
+                      {form.errors.phone && form.touched.phone && (
+                        <div className="invalid-feedback" style={{ color: 'red' }}>
+                          {form.errors.phone}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="form-group mt-4">
-                    <label htmlFor="phone">Birth day</label>
-                    <input type="date" className='form-control bg-light' placeholder='birthday' name='birthday' value={birthday} onChange={form.handleChange} />
+                  <div className="form-group mt-3">
+                    <label htmlFor="birthday">Birth day</label>
+                    {/* <input type="date" className='form-control bg-light' placeholder='birthday' name='birthday' value={birthday} onChange={form.handleChange} /> */}
+                    <div className="form-input">
+                      <input type="date" onBlur={form.handleBlur}
+                        className={`form-control ${form.errors.birthday && form.touched.birthday ? 'is-invalid' : ''}`}
+                        id="birthday" placeholder='Birthday' name='birthday' value={birthday} onChange={form.handleChange} />
+                      {form.errors.birthday && form.touched.birthday && (
+                        <div className="invalid-feedback" style={{ color: 'red' }}>
+                          {form.errors.birthday}
+                        </div>
+                      )}
+                    </div>
                   </div>
-
-                  <div className="form-group mt-4">
+                  <div className="form-group mt-3">
                     <label htmlFor="certification">Certification</label>
-                    <input type="text" className='form-control bg-light' placeholder='certification' name='certification' value={certification} onChange={form.handleChange} />
+                    {/* <input type="text" className='form-control bg-light' placeholder='certification' name='certification' value={certification} onChange={form.handleChange} /> */}
+                    <div className="form-input">
+                      <input type="text" onBlur={form.handleBlur}
+                        className={`form-control ${form.errors.certification && form.touched.certification ? 'is-invalid' : ''}`}
+                        id="certification" name='certification' placeholder="Certification" value={certification}
+                        onChange={form.handleChange} />
+                      {form.errors.certification && form.touched.certification && (
+                        <div className="invalid-feedback" style={{ color: 'red' }}>
+                          {form.errors.certification}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="input-right col-4">
+                <div className="input-right col-6">
                   <div className="form-group mt-3">
                     <label htmlFor="name">Name</label>
-                    <input type="text" className='form-control bg-light' placeholder='name' name='name' value={name} onChange={form.handleChange} />
+                    {/* <input type="text" className='form-control bg-light' placeholder='name' name='name' value={name} onChange={form.handleChange} /> */}
+                    <div className="form-input">
+                      <input type="text" onBlur={form.handleBlur}
+                        className={`form-control ${form.errors.name && form.touched.name ? 'is-invalid' : ''}`}
+                        id="name" name='name' value={name} placeholder="Full name"
+                        onChange={form.handleChange} />
+                      {form.errors.name && form.touched.name && (
+                        <div className="invalid-feedback" style={{ color: 'red' }}>
+                          {form.errors.name}
+                        </div>
+                      )}
+                    </div>
                   </div>
-
-                  <div className="updateGender form-group mt-4">
+                  <div className="updateGender form-group mt-3">
                     <label htmlFor="gender">Gender</label>
                     <section name='gender'>
                       <input
@@ -284,12 +352,21 @@ export default function InfoUser() {
                       <p htmlFor="Female">Female</p>
                     </section>
                   </div>
-
-                  <div className="form-group mt-4">
+                  <div className="form-group mt-3">
                     <label htmlFor="skill">Skill</label>
-                    <input type="text" className='form-control bg-light' placeholder='skill' name='skill' value={skill} onChange={form.handleChange} />
+                    {/* <input type="text" className='form-control bg-light' placeholder='skill' name='skill' value={skill} onChange={form.handleChange} /> */}
+                    <div className="form-input">
+                      <input type="text" onBlur={form.handleBlur}
+                        className={`form-control ${form.errors.skill && form.touched.skill ? 'is-invalid' : ''}`}
+                        id="skill" name='skill' placeholder="Skill" value={skill}
+                        onChange={form.handleChange} />
+                      {form.errors.skill && form.touched.skill && (
+                        <div className="invalid-feedback" style={{ color: 'red' }}>
+                          {form.errors.skill}
+                        </div>
+                      )}
+                    </div>
                   </div>
-
                   <button className='btn-update text-white mt-3 border-0 shadow' type='submit'>
                     Update
                   </button>

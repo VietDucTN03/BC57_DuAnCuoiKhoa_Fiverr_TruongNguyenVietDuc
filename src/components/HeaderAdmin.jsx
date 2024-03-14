@@ -44,7 +44,7 @@ export default function HeaderAdmin() {
             menuWrapper.classList.add('collapsed');
         }
     };
-    
+
 
     const dispatch = useDispatch();
     const [isScrolled, setIsScrolled] = useState(false);
@@ -77,10 +77,10 @@ export default function HeaderAdmin() {
                         </div>
                     </button>
                     <div className="dropdown-menu">
-                        {/* <li className="nav-item d-flex">
-                  <i className="fa-solid fa-user" />
-                  <NavLink className="nav-link nav-profile" aria-disabled="true" to="/user/profile">Profile</NavLink>
-                </li> */}
+                        <li className="nav-item d-flex">
+                            <i className="fa-solid fa-user" />
+                            <NavLink className="nav-link nav-profile" aria-disabled="true" to="/user/profile">Profile</NavLink>
+                        </li>
                         <button onClick={handleLogout} className="dropdown-item logout">
                             <i className="fa-solid fa-arrow-right-from-bracket" />
                             Log Out

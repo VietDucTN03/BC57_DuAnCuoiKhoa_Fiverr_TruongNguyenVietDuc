@@ -6,6 +6,7 @@ import { getAllJobAsyncThunkAction } from '../redux/reducers/JobReducer';
 import { ACCESS_TOKEN, TOKEN_CYBERSOFT, USER_LOGIN, USER_PROFILE } from '../util/config';
 import { history } from '../index';
 import unknownAvatar from '../assets/image/Avatar.jpg';
+import { Button, Drawer } from 'antd';
 
 const Header = () => {
 
@@ -13,14 +14,15 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
-  // const [jobList, setJobList] = useState([]);
   const [keyword, setKeyword] = useState('');
+  const [showNav, setShowNav] = useState(true);
+  const [showMenuZoomOut, setShowMenuZoomOut] = useState(false);
 
   const arrJob = useSelector((state) => state.jobReducer.arrJob);
   const { userLogin } = useSelector(state => state.userReducer);
   const userAvatar = useSelector((state) => state.userReducer.userProfile);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(!!userLogin);
+  const isLoggedIn = !!localStorage.getItem(ACCESS_TOKEN);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,7 +100,7 @@ const Header = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     // localStorage.removeItem(USER_INFO);
     localStorage.removeItem(USER_PROFILE);
-    setIsLoggedIn(false);
+    // setIsLoggedIn(false);
     history.push('/user/login');
   };
 
@@ -141,38 +143,80 @@ const Header = () => {
     }
   }
 
+  //Drawer
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1080) {
+        setShowNav(false);
+        setShowMenuZoomOut(true);
+      } else {
+        setShowNav(true);
+        setShowMenuZoomOut(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div>
-      <nav className={`navbar navbar-expand-lg ${isScrolled ? 'fixed-top' : ''}`}>
-        <div className="container-fluid">
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <NavLink className={`navbar-brand ${isScrolled ? 'scrolled' : ''}`} to="/">fiverr</NavLink>
+      {showNav && (
+        <nav className={`navbar navbar-expand-lg ${isScrolled ? 'fixed-top' : ''}`}>
+          <div className="container-fluid">
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <NavLink className={`navbar-brand ${isScrolled ? 'scrolled' : ''}`} to="/">fiverr</NavLink>
 
-            <div className={`header-search ${isScrolled ? '' : 'hidden'}`}>
-              <form action="" className='search' onSubmit={handleSearch}>
-                <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Find Services" name="keyword" onChange={handleGetKeyword} />
-                  <div className="input-group-append">
-                    <button className="btn btn-success" type="submit">
-                      Search
-                    </button>
+              <div className={`header-search ${isScrolled ? '' : 'hidden'}`}>
+                <form action="" className='search' onSubmit={handleSearch}>
+                  <div className="input-group">
+                    <input type="text" className="form-control" placeholder="Find Services" name="keyword" onChange={handleGetKeyword} />
+                    <div className="input-group-append">
+                      <button className="btn btn-success" type="submit">
+                        Search
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                </form>
+              </div>
 
-            <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${isScrolled ? 'scrolled' : ''}`}>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">Become a Seller</NavLink>
-              </li>
-              {renderButtonProfile()}
-            </ul>
+              <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${isScrolled ? 'scrolled' : ''}`}>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/">Become a Seller</NavLink>
+                </li>
+                {renderButtonProfile()}
+              </ul>
+            </div>
           </div>
+        </nav>
+      )}
+
+      {showMenuZoomOut && (
+        <div className="Menu-zoom-out">
+          <Button className='button-showMenu' type="primary" onClick={showDrawer}>
+            Fiverr
+          </Button>
+          <Drawer className='drawer-menu-header' title="Header Profile" onClose={onClose} open={open}>
+            <li className="nav-item mb-4">
+              <NavLink className="nav-link" to="/">Become a Seller</NavLink>
+            </li>
+            {renderButtonProfile()}
+          </Drawer>
         </div>
-      </nav>
+      )} 
+
       <section className={`job-menu ${isScrolled ? 'fixed-top' : ''}`}>
         <div className="menu-job">
           <ul className='job'>

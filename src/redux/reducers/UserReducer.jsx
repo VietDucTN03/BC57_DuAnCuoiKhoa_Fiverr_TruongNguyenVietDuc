@@ -115,13 +115,17 @@ export const loginAPI = (userLogin) => {
       console.log(action);
       dispatch(action);
 
-      if (history.location.pathname != '/user/profile') {
-        notification.success({
-          message: 'Logged in successfully!!',
-          duration: 5,
-        });
+      const role = result.data.content.user.role;
+      if (role === 'ADMIN') {
+        history.push('/admin/management');
+      } else {
         history.push('/');
       }
+
+      notification.success({
+        message: 'Logged in successfully!!',
+        duration: 5,
+      });
 
     } catch (err) {
 
@@ -147,6 +151,10 @@ export const postUserAsyncThunkAction = createAsyncThunk(
       };
 
       const res = await http.post('/users', user);
+      notification.success({
+        message: 'Add ADMIN Successfull!!',
+        duration: 5,
+      });
       console.log(res.data.content);
       return res.data.content;
     } catch (err) {

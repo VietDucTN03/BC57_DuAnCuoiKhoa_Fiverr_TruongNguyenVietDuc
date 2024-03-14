@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../assets/scss/pages/Categories/categories.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
@@ -10,6 +10,16 @@ export default function Categories() {
     const params = useParams();
     const categories = useSelector((state) => state.jobReducer.Categories);
     console.log(categories);
+
+    const [activeDropdown, setActiveDropdown] = useState(null);
+
+    const toggleDropdown = (dropdown) => {
+        if (activeDropdown === dropdown) {
+            setActiveDropdown(null);
+        } else {
+            setActiveDropdown(dropdown);
+        }
+    };
 
     useEffect(() => {
         dispatch(getCategoriesAsyncThunkAction(params.id))
@@ -39,14 +49,14 @@ export default function Categories() {
                             </div>
                             <div className="rating">
                                 <i className="fa-solid fa-star" />
-                                <span className="star-rate">{saoCongViec}</span>
+                                <span className="star-rate mx-1">{saoCongViec}</span>
                                 <span className="rating-amount">({danhGia})</span>
                             </div>
                         </div>
                         <div className="card-footer">
                             <i className="fa-solid fa-heart" />
                             <div className="price">
-                                <p className="mr-1">STARTING AT</p>
+                                <p className="m-1">STARTING AT</p>
                                 <span>US${giaTien}</span>
                             </div>
                         </div>
@@ -59,35 +69,42 @@ export default function Categories() {
     return (
         <div className="categories-detail">
             <div className="container">
-                {/* <div className="categories-detail__link">
-                    <ul className="d-flex align-items-center">
-                        <li>
-                            <a href="#">{categories[0]?.tenLoaiCongViec}</a>
-                        </li>
-                        <li>
-                            <i className="fa-solid fa-chevron-right" />
-                            <a href="#">{categories[0]?.tenNhomChiTietLoai}</a>
-                        </li>
-                        <li>
-                            <i className="fa-solid fa-chevron-right" />
-                            <a href="#">{categories[0]?.tenChiTietLoai}</a>
-                        </li>
-                    </ul>
-                </div> */}
-                <div className="categories-detail__title">
+                <div className="categories-detail-title">
                     <span>{categories[0]?.tenChiTietLoai}</span>
                 </div>
-                <div className="categories-detail__optionbar">
+                <div className="categories-detail-option">
                     <div className="left">
-                        <div className="dropdown ">
+                        <div className={`dropdown ${activeDropdown === 'serviceOptions' ? 'show' : ''}`}>
                             <button
                                 type="button"
                                 className="btn dropdown-toggle"
-                                data-toggle="dropdown"
+                                onClick={() => toggleDropdown('serviceOptions')}
+                            >
+                                Category
+                            </button>
+                            <div className={`dropdown-menu ${activeDropdown === 'serviceOptions' ? 'show' : ''}`}>
+                                <a className="dropdown-item active" href="#">
+                                    All Categories
+                                </a>
+                                <a className="dropdown-item" href="#">
+                                    Web Programing
+                                    <span>(20,566)</span>
+                                </a>
+                                <a className="dropdown-item" href="#">
+                                    Data Entry
+                                    <span>(12,566)</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div className={`dropdown ${activeDropdown === 'sellerDetails' ? 'show' : ''}`}>
+                            <button
+                                type="button"
+                                className="btn dropdown-toggle"
+                                onClick={() => toggleDropdown('sellerDetails')}
                             >
                                 Service Options
                             </button>
-                            <div className="dropdown-menu">
+                            <div className={`dropdown-menu ${activeDropdown === 'sellerDetails' ? 'show' : ''}`}>
                                 <a className="dropdown-item active" href="#">
                                     All Categories
                                 </a>
@@ -101,15 +118,15 @@ export default function Categories() {
                                 </a>
                             </div>
                         </div>
-                        <div className="dropdown ">
+                        <div className={`dropdown ${activeDropdown === 'budget' ? 'show' : ''}`}>
                             <button
                                 type="button"
                                 className="btn dropdown-toggle"
-                                data-toggle="dropdown"
+                                onClick={() => toggleDropdown('budget')}
                             >
                                 Seller Details
                             </button>
-                            <div className="dropdown-menu">
+                            <div className={`dropdown-menu ${activeDropdown === 'budget' ? 'show' : ''}`}>
                                 <a className="dropdown-item active" href="#">
                                     All Categories
                                 </a>
@@ -123,37 +140,15 @@ export default function Categories() {
                                 </a>
                             </div>
                         </div>
-                        <div className="dropdown ">
+                        <div className={`dropdown ${activeDropdown === 'deliveryTime' ? 'show' : ''}`}>
                             <button
                                 type="button"
                                 className="btn dropdown-toggle"
-                                data-toggle="dropdown"
-                            >
-                                Budget
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item active" href="#">
-                                    All Categories
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    Web Programing
-                                    <span>(20,566)</span>
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    Data Entry
-                                    <span>(12,566)</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="dropdown ">
-                            <button
-                                type="button"
-                                className="btn dropdown-toggle"
-                                data-toggle="dropdown"
+                                onClick={() => toggleDropdown('deliveryTime')}
                             >
                                 Delivery Time
                             </button>
-                            <div className="dropdown-menu">
+                            <div className={`dropdown-menu ${activeDropdown === 'deliveryTime' ? 'show' : ''}`}>
                                 <a className="dropdown-item active" href="#">
                                     All Categories
                                 </a>
@@ -169,30 +164,30 @@ export default function Categories() {
                         </div>
                     </div>
                     <div className="right">
-                        <div className="custom-control custom-switch">
+                        <div className="form-check form-switch">
                             <input
                                 type="checkbox"
-                                className="custom-control-input"
+                                className="form-check-input"
                                 id="switch1"
                             />
                             <label className="custom-control-label" htmlFor="switch1">
                                 Pro services
                             </label>
                         </div>
-                        <div className="custom-control custom-switch">
+                        <div className="form-check form-switch">
                             <input
                                 type="checkbox"
-                                className="custom-control-input"
+                                className="form-check-input"
                                 id="switch2"
                             />
                             <label className="custom-control-label" htmlFor="switch2">
                                 Local Sellers
                             </label>
                         </div>
-                        <div className="custom-control custom-switch">
+                        <div className="form-check form-switch">
                             <input
                                 type="checkbox"
-                                className="custom-control-input"
+                                className="form-check-input"
                                 id="switch3"
                             />
                             <label className="custom-control-label" htmlFor="switch3">
@@ -201,7 +196,7 @@ export default function Categories() {
                         </div>
                     </div>
                 </div>
-                <div className="categories-detail__sort py-3">
+                <div className="categories-detail-sort py-3">
                     <div className="categories-amount">
                         <span>{categories.length} services available</span>
                     </div>
@@ -214,7 +209,7 @@ export default function Categories() {
                         </select>
                     </div>
                 </div>
-                <div className="categories-detail__content">
+                <div className="categories-detail-content">
                     <div className="row">{renderCardItem()}</div>
                 </div>
             </div>

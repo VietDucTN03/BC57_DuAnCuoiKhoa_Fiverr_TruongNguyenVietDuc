@@ -27,48 +27,6 @@ const Result = () => {
     dispatch(getJobByNameAsyncThunkAPi(params.keyword))
   }, [dispatch, params.keyword]);
 
-  // const renderCardItem = () => {
-  //   return arrJobByName?.map((element) => {
-  //     const { id, danhGia, giaTien, tenCongViec, saoCongViec } = element.congViec;
-
-  //     return (
-  //       <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" key={id}>
-  //         <div className="card">
-  //           <NavLink to={`/job-detail/${id}`}>
-  //             <img className="card-img-top" src={element.congViec.hinhAnh} alt="" />
-  //           </NavLink>
-  //           <div className="card-body">
-  //             <div className="seller-info">
-  //               <div className="avatar">
-  //                 <img src={element.avatar} alt="" />
-  //               </div>
-  //               <div className="info">
-  //                 <h5>{element.tenNguoiTao}</h5>
-  //                 <p>Level {saoCongViec} Seller</p>
-  //               </div>
-  //             </div>
-  //             <div className="card-text">
-  //               <NavLink to={`/job-detail/${id}`}>{tenCongViec}</NavLink>
-  //             </div>
-  //             <div className="rating">
-  //               <i className="fa-solid fa-star" />
-  //               <span className="star-rate">{saoCongViec}</span>
-  //               <span className="rating-amount">({danhGia})</span>
-  //             </div>
-  //           </div>
-  //           <div className="card-footer">
-  //             <i className="fa-solid fa-heart" />
-  //             <div className="price">
-  //               <p className="mr-1">STARTING AT</p>
-  //               <span>US${giaTien}</span>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     );
-  //   });
-  // };  
-
   return (
     <div className="job-detail">
       <div className="container">
@@ -83,7 +41,7 @@ const Result = () => {
                 className="btn dropdown-toggle"
                 onClick={() => toggleDropdown('serviceOptions')}
               >
-                Service Options
+                Category
               </button>
               <div className={`dropdown-menu ${activeDropdown === 'serviceOptions' ? 'show' : ''}`}>
                 <a className="dropdown-item active" href="#">
@@ -105,7 +63,7 @@ const Result = () => {
                 className="btn dropdown-toggle"
                 onClick={() => toggleDropdown('sellerDetails')}
               >
-                Seller Details
+                Service Options
               </button>
               <div className={`dropdown-menu ${activeDropdown === 'sellerDetails' ? 'show' : ''}`}>
                 <a className="dropdown-item active" href="#">
@@ -127,7 +85,7 @@ const Result = () => {
                 className="btn dropdown-toggle"
                 onClick={() => toggleDropdown('budget')}
               >
-                Budget
+                Seller Details
               </button>
               <div className={`dropdown-menu ${activeDropdown === 'budget' ? 'show' : ''}`}>
                 <a className="dropdown-item active" href="#">
@@ -167,36 +125,6 @@ const Result = () => {
             </div>
           </div>
           <div className="right">
-            {/* <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="switch1"
-              />
-              <label className="custom-control-label" htmlFor="switch1">
-                Pro services
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="switch2"
-              />
-              <label className="custom-control-label" htmlFor="switch2">
-                Local Sellers
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="switch3"
-              />
-              <label className="custom-control-label" htmlFor="switch3">
-                Online Sellers
-              </label>
-            </div> */}
 
             <div className="form-check form-switch">
               <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
@@ -259,7 +187,7 @@ const Result = () => {
                       </div>
                     </div>
                     <div className="card-footer">
-                      <i className="fa-solid fa-heart" />
+                      <i className="fa-solid fa-heart text-danger" />
                       <div className="price">
                         <p>STARTING AT</p>
                         <span>US${job.congViec.giaTien}</span>
@@ -271,7 +199,7 @@ const Result = () => {
             </div>
           </div>
         ) : (
-          <div>No jobs found</div>
+          <div className='text-not-found mx-2'>No jobs found</div>
         )}
 
       </div>

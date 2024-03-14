@@ -51,8 +51,9 @@ export default function Login() {
           </div>
         </div>
         <div className='login-right'>
-          <form action="" className='container mt-4' onSubmit={form.handleSubmit}>
-            <div className='login-title mx-auto w-50'>
+          <form action="" className='container' onSubmit={form.handleSubmit}>
+            <h1 className='title-signin text-center'>Signin</h1>
+            <div className='login-title mx-auto w-75'>
               <div className="form-group mb-3">
                 {/* <p htmlFor="email" className='m-1 text-secondary'>Email</p> */}
                 <i className="fa-solid fa-user" />
@@ -83,9 +84,9 @@ export default function Login() {
                     <button type='submit' className='btn mt-2'>Login</button>
                   </div>
                   <div className="col-8">
-                    <h6 className='mt-3 registerNow text-success' onClick={() => {
+                    <h6 className='mx-3 registerNow' onClick={() => {
                       history.push('/user/register');
-                    }}>Register now?</h6>
+                    }}>Register here?</h6>
                   </div>
                 </div>
               </div>

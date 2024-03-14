@@ -5,3 +5,46 @@
 // footer {
 //     background-color: burlywood;
 // }
+
+.footer-admin {
+  text-align: center;
+  background-color: $c0-bg-light1;
+  height: 65px;
+  .container {
+    .footer-left {
+      text-align: left !important;
+      p {
+        line-height: 22px;
+        @include text($fz-small2, $fw-regular, $c0-text-dark1);
+        a {
+          font-style: italic;
+          @include text($fz-base, $fw-medium, $c0-bg-light-blue);
+        }
+        a:hover {
+          opacity: 0.8;
+          color: $c0-bg-purple-to-blue;
+        }
+      }
+    }
+    .footer-right {
+      .social li {
+        margin-right: 5px;
+        a {
+          @include text($fz-small2, $fw-regular, $c0-text-dark2);
+          line-height: 36px;
+          display: inline-block;
+          transition: transform 0.5s ease;
+        }
+        &:hover a {
+          transform: scale(1.5);
+        }
+        .icon {
+          .fab {
+            margin: 0 10px 0;
+            @include text($fz-small2, $fw-regular, $c0-text-grey);
+          }
+        }
+      }
+    }
+  }
+}

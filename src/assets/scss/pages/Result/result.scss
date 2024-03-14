@@ -8,10 +8,8 @@
     .container {
         margin-top: 110px;
         .job-detail-title {
-            color: #222325;
-            font-size: 32px;
-            font-weight: 700;
             line-height: 36px;
+            @include text($fz-xl3, $fw-bold, $c0-text-dark);
             padding: 20px 0 34px;
         }
         .job-detail-optionbar {
@@ -22,33 +20,29 @@
                 display: flex;
                 gap: 0.5rem;
                 .btn {
-                    border: 1px solid #dadbdd;
-                    border-radius: 4px;
-                    color: #222325;
-                    font-size: 16px;
-                    font-weight: 550;
                     margin: 0 6px 0 0;
                     padding: 6px 12px;
+                    border: 1px solid $c0-bg-light1;
+                    border-radius: 4px;
+                    @include text($fz-base, $fw-semibold, $c0-text-dark);
                 }
                 .dropdown-menu {
-                    border: 1px solid #e4e5e7;
+                    border: 1px solid $c0-bg-light1;
                     border-radius: 4px;
                     min-width: 240px;
                     padding: 18px;
                     z-index: 1000;
                     .dropdown-item {
-                        color: #404145;
-                        font-size: 14px;
-                        font-weight: 600;
+                        @include text($fz-small2, $fw-semibold, $c0-text-dark2);
                         padding: 4px 0;
                         display: flex;
                         justify-content: space-between;
                         span {
-                            color: #b5b6ba;
+                            color: $c0-text-dark1;
                         }
                     }
                     .dropdown-item.active {
-                        color: #1dbf73;
+                        color: $c0-bg-button;
                         background: none;
                     }
                 }
@@ -66,8 +60,8 @@
                 align-items: center;
                 gap: 40px;
                 .form-check-input:checked {
-                    background-color: green;
-                    border-color: green;
+                    background-color: $c0-bg-button;
+                    border-color: $c0-bg-button;
                 }
             }
         }
@@ -76,27 +70,26 @@
             justify-content: space-between;
             align-items: center;
             .categories-amount {
-                color: #74767e;
-                font-size: 14px;
-                font-weight: 600;
                 line-height: 22px;
                 padding: 0 10px;
+                @include text($fz-small2, $fw-semibold, $c0-text-dark1);
             }
             .sort-by {
                 span {
-                    font-size: 16px;
+                    font-size: $fz-base;
                     padding: 0;
                 }
                 select {
                     border: none;
-                    color: #222325;
                     cursor: pointer;
-                    font-size: 16px;
-                    font-weight: 700;
                     outline: none;
                     padding-right: 5px;
+                    @include text($fz-base, $fw-bold, $c0-text-dark);
                 }
             }
+        }
+        .text-not-found {
+            @include text($fz-xl2, $fw-bold, $c0-text-dark);
         }
         .job-detail-content {
             .card {
@@ -118,22 +111,20 @@
                         }
                         .info {
                             h5 {
-                                font-weight: 500;
+                                font-weight: $fw-medium;
                             }
                             p {
-                                font-size: 12px;
+                                font-size: $fz-small1;
                             }
                         }
                     }
                     .card-text {
                         .name-job {
-                            color: #222325;
                             display: inline-block;
-                            font-size: 16px;
-                            font-weight: 500;
                             height: 55px;
                             line-height: 22px;
                             transition: 0.15s ease-in-out;
+                            @include text($fz-base, $fw-medium, $c0-text-dark);
                         }
                         .name-job:hover {
                             color: #1dbf73;
@@ -142,12 +133,11 @@
                     .rating {
                         color: #ffbe5b;
                         .star-rate {
-                            font-weight: 700;
+                            font-weight: $fw-bold;
                             margin: 0 5px 0;
                         }
                         .rating-amount {
-                            color: #b5b6ba;
-                            font-weight: 500;
+                            @include text($fz-base, $fw-medium, $c0-text-dark1);
                         }
                     }
                 }
@@ -155,10 +145,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    background-color: #fff;
+                    background-color: $c0-bg-light;
                     padding: 10px 12px;
                     i {
-                        color: #b5b6ba;
+                        color: $c0-text-dark1;
                         cursor: pointer;
                     }
                     .price {
@@ -166,18 +156,14 @@
                         align-items: center;
                         justify-content: space-between;
                         p {
-                            color: #74767e;
                             display: inline-block;
-                            font-size: 10px;
-                            font-weight: 700;
                             letter-spacing: 0.5px;
                             margin: 0 5px 0;
+                            @include text($fz-small, $fw-bold, $c0-text-dark1);
                         }
                         span {
-                            color: #404145;
-                            font-size: 18px;
-                            font-weight: 600;
                             line-height: 20px;
+                            @include text($fz-xl, $fw-semibold, $c0-text-dark2);
                         }
                     }
                 }

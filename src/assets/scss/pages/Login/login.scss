@@ -3,7 +3,7 @@
 @import "../../components/component";
 
 .page-login {
-  padding: 165px 0 50px;
+  padding: 135px 0 40px;
   background-color: $c0-bg-bgproduct;
   .login {
     width: 75%;
@@ -12,6 +12,7 @@
     border-radius: 20px;
     box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
     margin: 0 auto;
+    padding-top: 20px;
     .login-left {
       width: 50%;
       padding: 30px;
@@ -26,12 +27,15 @@
       width: 50%;
       overflow: hidden;
       .container {
+        .title-signin {
+          margin-bottom: 20px;
+          @include text($fz-xl3, $fw-semibold, $c0-text-green1);
+        }
         .login-title {
           .form-group {
             display: flex;
-            width: 120%;
-            margin-left: -25px;
             .input-field {
+              width: 85%;
               height: 50px;
               .form-control {
                 margin-left: 10px;
@@ -45,9 +49,16 @@
             }
           }
           .typesubmitLogin {
-            margin: 0px;
+            margin: 10px 50px 0;
             .registerNow {
-                
+              margin-top: 20px;
+              @include text($fz-base, $fw-medium, $c0-text-green1);
+              font-style: italic;
+              cursor: pointer;
+              transition: color 0.3s;
+            }
+            .registerNow:hover {
+              color: $c0-bg-button;
             }
             .submitLogin {
               .btn {

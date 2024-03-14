@@ -11,27 +11,33 @@
 }
 .footer {
   .footer-top {
+    margin: 0 25px;
     .container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       .support {
         margin-right: 50px;
       }
       .title {
         .title-text {
-          @include text($fz-xl1, $fw-semibold, $c0-text-dark);
+          text-align: left;
+          @include text($fz-xl, $fw-semibold, $c0-text-dark);
         }
       }
       .content {
         position: relative;
-        .content-text {
-          color: $c0-text-dark;
+        .a {
           display: flex;
-          position: relative;
-          @include customAfterEffect;
-        }
-        .content-span {
-          @include text($fz-small2, $fw-regular, $c0-text-grey);
+          .content-text {
+            display: inline;
+            @include text($fz-small2, $fw-regular, $c0-text-dark);
+            position: relative;
+            @include customAfterEffect;
+          }
+          .content-span {
+            @include text($fz-small1, $fw-regular, $c0-text-grey);
+          }
         }
       }
     }
@@ -85,7 +91,7 @@
         }
         .event-link {
           .english {
-            margin: 0 10px 0;
+            margin: 0 0 0 10px;
             .english-link {
               @include text($fz-base, $fw-regular, $c0-text-grey);
               &:hover {

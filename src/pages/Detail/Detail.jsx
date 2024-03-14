@@ -73,7 +73,13 @@ const Detail = () => {
         },
 
         onSubmit: (values) => {
-            dispatch(postCommentAsyncThunkAction(values));
+            dispatch(postCommentAsyncThunkAction(values))
+                .then(() => {
+                    dispatch(getCommentByJob(params.id));
+                })
+                .catch((error) => {
+                    console.error('Error upload Avatar:', error);
+                });
             console.log(values);
         }
     })
@@ -182,12 +188,12 @@ const Detail = () => {
                             <div className="job-img mt-3">
                                 <img className="img-fluid w-100" src={job.congViec.hinhAnh} alt="" />
                             </div>
-                            <div className="job-desc mt-5">
-                                <h2 className="title-h2">About this gig</h2>
+                            <div className="job-desc mt-4">
+                                <h2 className="title-h2 mb-3">About this Gig</h2>
                                 <p>{job.congViec.moTa}</p>
                             </div>
-                            <div className="seller-info mt-5">
-                                <h2 className="title-h2">About The Seller</h2>
+                            <div className="seller-info mt-4">
+                                <h2 className="title-h2 mb-4">About The Seller</h2>
                                 <div className="seller-profile d-flex" style={{ gap: '1rem' }}>
                                     <div className="profile-img">
                                         <img className="w-100 rounded-circle" src={job.avatar} alt="" />
@@ -203,8 +209,8 @@ const Detail = () => {
                                                     defaultValue={job.congViec.saoCongViec}
                                                 />
                                             </div>
-                                            <div className="star-score">{job.congViec.saoCongViec}</div>
-                                            <div className="rating">({job.congViec.danhGia})</div>
+                                            <h5 className="star-score">{job.congViec.saoCongViec}</h5>
+                                            <p className="rating">({job.congViec.danhGia})</p>
                                         </div>
                                         <button>Contact me</button>
                                     </div>
@@ -241,7 +247,7 @@ const Detail = () => {
                                     ]}
                                 />
                             </div>
-                            <div className="review-section mt-4">
+                            <div className="review-section mt-3">
                                 <h2 className="title-h2">Reviews</h2>
                                 <div className="review-overview d-flex justify-content-between align-items-center">
                                     <h3>{job.congViec.danhGia} reviews for this Gig</h3>
@@ -250,9 +256,9 @@ const Detail = () => {
                                         <p className="star-score">{job.congViec.saoCongViec}</p>
                                     </div>
                                 </div>
-                                <div className="review-rating mt-3 row">
+                                <div className="review-rating mt-2 row">
                                     <div className="col-md-6 col-sm-12">
-                                        <div className="rating-detail">
+                                        <div className="rating-detail mt-1">
                                             <table>
                                                 <tbody className="">
                                                     <tr>
@@ -364,7 +370,7 @@ const Detail = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="filter-zone mt-5">
+                                <div className="filter-zone mt-2">
                                     <h2 className="title-h2">Filters</h2>
                                     <div className="d-flex justify-content-between align-items-center">
                                         <div className="sort-by d-flex align-items-center">
@@ -379,9 +385,9 @@ const Detail = () => {
                                 <div className="review-comment">
                                     <ul className="review-comment-list">{renderComment()}</ul>
                                 </div>
-                                <div className="add-comment py-4">
+                                <div className="add-comment py-3">
                                     <form className="bottom" onSubmit={form.handleSubmit}>
-                                        <div className="top mb-4 d-flex align-items-center justify-content-between">
+                                        <div className="top mb-3 d-flex align-items-center justify-content-between">
                                             <h2 className="title-h2">Leave comments</h2>
                                             <div className="rating-comment d-flex align-items-center">
                                                 <Rate allowHalf={false} defaultValue={form.values.saoBinhLuan} onChange={handleRate} />
@@ -390,9 +396,9 @@ const Detail = () => {
                                         </div>
                                         <input type="text" onBlur={form.handleBlur} className={`form-control ${form.errors.noiDung && form.touched.noiDung ? 'is-invalid' : ''}`} id='comment' name='noiDung' placeholder='comment...' onChange={form.handleChange} />
                                         {form.errors.noiDung && form.touched.noiDung && (
-                                            <div className="invalid-feedback" style={{ color: 'red' }}>
+                                            <p className="invalid-feedback" style={{ color: 'red', fontSize: 16 }}>
                                                 {form.errors.noiDung}
-                                            </div>
+                                            </p>
                                         )}
                                         <button type="submit" className="comment-btn">
                                             Comment

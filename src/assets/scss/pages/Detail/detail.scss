@@ -3,41 +3,42 @@
 @import "../../components/component";
 
 .job-detail-wrapper {
-  margin-top: 170px;
+  margin-top: 125px;
   .job-detail-info {
-    color: #62646a;
+    width: 90%;
+    .detailed-job-information {
+      p {
+        @include text($fz-small2, $fw-medium, $c0-text-green1);
+      }
+    }
     .title-h2 {
-      color: #404145;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 30px;
+      @include text($fz-xl1, $fw-bold, $c0-text-dark2);
     }
     .job-title {
-      color: #404145;
-      font-size: 28px;
-      font-weight: 700;
+      @include text($fz-xl3, $fw-bold, $c0-text-dark2);
       margin-bottom: 16px;
     }
     .seller-overview {
       .overview-content {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        font-size: 15px;
-        font-weight: 500;
+        // display: flex;
+        // flex-direction: column;
+        // gap: 5px;
+        // font-size: 15px;
+        // font-weight: 500;
         .top,
         .bottom {
           gap: 10px;
         }
+        .top {
+          .seller-name {
+            cursor: pointer;
+            text-transform: capitalize;
+            @include text($fz-base, $fw-bold, $c0-text-dark2);
+          }
+        }
         .bottom {
           align-items: center;
-        }
-        .seller-name {
-          color: #404145;
-          cursor: pointer;
-          font-weight: 700;
-          text-transform: capitalize;
-        }
+        }       
         .seller-level,
         .seller-ordered {
           border-left: 1px solid #e4e5e7;
@@ -47,12 +48,12 @@
           font-size: 18px;
         }
         .star {
+          margin-top: 8px;
           padding-top: 3px;
         }
         .star-score {
-          color: #ffb33e;
-          font-weight: 700;
-          margin: 0 4px;
+          margin: 0 6px;
+          @include text($fz-xl, $fw-bold, $c0-text-star);
         }
         .seller-ordered {
           color: #95979d;
@@ -61,7 +62,6 @@
     }
     .job-img {
       overflow: hidden;
-      width: 80%;
       img {
         transition: all 0.5s ease;
         &:hover {
@@ -71,9 +71,8 @@
     }
     .job-desc {
       p {
-        border-bottom: 1px solid #c5c6c9;
-        color: #62646a;
-        font-size: 18px;
+        border-bottom: 1px solid $c0-bg-grey;
+        @include text($fz-base, $fw-regular, $c0-text-grey1);
         padding-bottom: 20px;
       }
     }
@@ -86,45 +85,32 @@
         }
         .profile-content {
           h3 {
-            color: #62646a;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             text-transform: capitalize;
             cursor: pointer;
+            @include text($fz-xl, $fw-bold, $c0-text-dark2);
           }
           p {
-            color: #62646a;
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 4px;
+            @include text($fz-base, $fw-medium, $c0-text-grey1);
+            margin-bottom: 8px;
           }
           .seller-rating {
             .star-score {
               color: #ffb33e;
               font-weight: 700;
-              margin: 0 4px;
+              margin: 0 10px;
             }
             .rating {
               font-weight: 500;
+              margin: 0;
+              @include text($fz-base, $fw-medium, $c0-text-brown);
             }
           }
           button {
-            background-color: transparent;
-            border: 1px solid #74767e;
-            border-radius: 5px;
-            color: #74767e;
-            font-weight: 600;
-            margin-top: 20px;
-            padding: 8px 24px;
-            transition: 70ms cubic-bezier(0.75, 0, 0.25, 1);
-            &:hover {
-              background-color: #74767e;
-              color: #fff;
-            }
-            &:focus {
-              outline: 0;
-            }
+            border-radius: 10px;
+            margin-top: 15px;
+            padding: 5px 15px;
+            @include button($fz-xl, $fw-medium, $c0-text-dark2, $c0-bg-bgproduct, 1px $c0-text-grey1 solid, $c0-bg-black1,  $c0-text-light);
           }
         }
       }
@@ -135,9 +121,7 @@
         .ant-collapse-header {
           padding: 0;
           .ant-collapse-header-text h3 {
-            color: #62646a;
-            font-size: 16px;
-            font-weight: 600;
+            @include text($fz-base, $fw-semibold, $c0-text-dark1);
           }
         }
         .ant-collapse-content-box {
@@ -151,43 +135,35 @@
     .review-section {
       .review-overview {
         h3 {
-          color: #404145;
-          font-size: 18px;
-          font-weight: 600;
+          @include text($fz-xl, $fw-semibold, $c0-text-dark2);
         }
         .star {
           .star-score {
-            color: #ffb33e;
-            font-weight: 700;
             margin-left: 4px;
+            @include text($fz-base, $fw-maxbold, $c0-text-star);
           }
         }
       }
       .review-rating {
         .ant-rate {
-          font-size: 18px;
+          font-size: $fz-xl;
         }
         .rating-progress-bar {
           padding: 0 8px;
         }
         .star-number {
-          color: #ffb33e;
-          font-size: 15px;
-          font-weight: 500;
           text-align: right;
+          @include text($fz-base, $fw-medium, $c0-text-star);
         }
         .rating-breakdown {
           h5 {
-            font-size: 16px;
-            font-weight: 600;
             margin: 5px 0 15px;
+            @include text($fz-base, $fw-semibold, $c0-text-dark);
           }
           ul li {
             p {
-              color: #95979d;
-              font-size: 16px;
-              font-weight: 600;
               margin-bottom: 0;
+              @include text($fz-base, $fw-semibold, $c0-bg-grey1);
             }
             .d-flex {
               color: #ffb33e;
@@ -204,34 +180,29 @@
         padding-bottom: 20px;
         .sort-by {
           span {
-            color: #74767e;
-            font-size: 16px;
-            font-weight: 600;
             line-height: 22px;
             padding: 0 10px;
+            @include text($fz-base, $fw-semibold, $c0-bg-black1);
           }
           select {
             border: none;
-            color: #222325;
-            font-size: 16px;
-            font-weight: 500;
             outline: none;
             padding-right: 5px;
             cursor: pointer;
+            @include text($fz-base, $fw-medium, $c0-text-dark);
           }
         }
         .search-box {
           width: 50%;
           .ant-input {
-            border: 1px solid #c5c6c9;
+            border: 1px solid $c0-bg-grey;
             border-radius: 4px 0 0 4px;
-            color: #62646a;
-            font-size: 16px;
             outline: none;
             padding: 10px 2px 10px 16px;
+            @include text($fz-base, $fw-regular, $c0-text-grey1);
           }
           .ant-input-group-addon {
-            background-color: #222325;
+            background-color: $c0-bg-black;
             border-radius: 0 4px 4px 0;
             button {
               background-color: transparent;
@@ -248,7 +219,7 @@
     .review-comment {
       .review-comment-list {
         .row {
-          border-bottom: 1px solid #c5c6c9;
+          border-bottom: 1px solid $c0-bg-grey;
           .reviewer-avatar img {
             width: 70px;
             height: 70px;
@@ -256,17 +227,15 @@
           }
           .comment-box {
             .reviewer-name {
-              color: #404145;
-              font-size: 16px;
-              font-weight: 600;
               line-height: 24px;
+              @include text($fz-base, $fw-semibold, $c0-text-grey);
             }
             .comment-date {
               font-size: 14px;
             }
             .reviewer-rating {
               .ant-rate {
-                font-size: 16px;
+                font-size: $fz-base;
               }
             }
             .country {
@@ -278,17 +247,14 @@
                 height: 20px;
               }
               span {
-                font-size: 14px;
-                color: #62646a;
-                font-weight: 500;
                 margin-left: 0.5rem;
+                @include text($fz-small2, $fw-medium, $c0-text-grey1);
               }
             }
             .comment-text {
               p {
-                color: #404145;
-                font-size: 16px;
                 margin-bottom: 1em;
+                @include text($fz-base, $fw-medium, $c0-text-grey);
               }
             }
             .reviewer-action {
@@ -296,9 +262,7 @@
               align-items: center;
               gap: 0.5rem;
               span {
-                color: #404145;
-                font-weight: 600;
-                font-size: 14px;
+                @include text($fz-small2, $fw-semibold, $c0-text-grey);
               }
               .helpful-btn {
                 display: flex;
@@ -316,43 +280,44 @@
         }
       }
     }
-    // .add-comment {
-    //   .top {
-    //     .title-h2 {
-    //       margin: 0;
-    //     }
-    //     .rating-comment {
-    //       gap: 8px;
-    //       .ant-rate {
-    //         font-size: 18px;
-    //       }
-    //     }
-    //   }
-    //   .bottom {
-    //     textarea#comment {
-    //       &:focus {
-    //         box-shadow: none;
-    //         outline: auto #373d42;
-    //         border-color: #ced4da;
-    //       }
-    //     }
-    //     div {
-    //       font-size: 15px;
-    //     }
-    //     .comment-btn {
-    //       background-color: #1dbf73;
-    //       border: none;
-    //       border-radius: 5px;
-    //       color: #fff;
-    //       display: inline-block;
-    //       font-weight: 500;
-    //       margin-top: 10px;
-    //       padding: 8px 20px;
-    //       &:focus {
-    //         outline: 0;
-    //       }
-    //     }
-    //   }
-    // }
+    .add-comment {
+      .top {
+        .title-h2 {
+          margin: 0;
+        }
+        .rating-comment {
+          gap: 8px;
+          .ant-rate {
+            font-size: 18px;
+          }
+        }
+      }
+      .bottom {
+        textarea#comment {
+          &:focus {
+            box-shadow: none;
+            outline: auto #373d42;
+            border-color: #ced4da;
+          }
+        }
+        div {
+          font-size: 20px;
+        }
+        .comment-btn {
+          border: none;
+          border-radius: 10px;
+          display: inline-block;
+          margin-top: 10px;
+          padding: 8px 20px;
+          @include button($fz-xl, $fw-semibold, $c0-text-light1, $c0-bg-button, 1px $c0-bg-bgproduct solid, $c0-bg-bgproduct, $c0-text-dark2);
+          &:focus {
+            outline: 0;
+          }
+        }
+      }
+      .invalid-feedback {
+        margin: 5px 0 0 0;
+      }
+    }
   }
 }

@@ -31,7 +31,7 @@ export default function JobTitle() {
   const renderExploreContent = () => {
     return jobTitle.map(({ dsNhomChiTietLoai }) => {
       return dsNhomChiTietLoai.map(({ id, hinhAnh, tenNhom, dsChiTietLoai }) => (
-        <div className="explore__item" key={id}>
+        <div className="explore-item" key={id}>
           <img src={hinhAnh} alt="" />
           <h1>{tenNhom}</h1>
           {dsChiTietLoai.map(({ id, tenChiTiet }) => (
@@ -47,10 +47,10 @@ export default function JobTitle() {
   };
 
   return (
-    <>
+    <div className='page-job-title'>
       <div className="job-categories-banner">
-        <div className="banner__container">
-          <div className="banner__content d-flex align-items-center justify-content-center flex-column h-100">
+        <div className="banner-container">
+          <div className="banner-content d-flex align-items-center justify-content-center flex-column h-100">
             <h1>{jobTitle[0]?.tenLoaiCongViec}</h1>
             <p>Designs to make you stand out.</p>
             <button className="btn btn-outline-light">
@@ -64,8 +64,8 @@ export default function JobTitle() {
       <div className="job-categories-popular">
         <div className="container mt-lg-5 mt-sm-3 mb-lg-5 mb-sm-3">
           <h1>Most popular in {jobTitle[0]?.tenLoaiCongViec}</h1>
-          <div className="popular__content">
-            <div className="popular__item">
+          <div className="popular-content">
+            <div className="popular-item">
               <img
                 src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101614/Logo%20design_2x.png"
                 alt=""
@@ -73,7 +73,7 @@ export default function JobTitle() {
               <span>Minimalist Logo Design</span>
               <i className="fa-solid fa-arrow-right" />
             </div>
-            <div className="popular__item">
+            <div className="popular-item">
               <img
                 src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101618/Architecture%20_%20Interior%20Design_2x.png"
                 alt=""
@@ -81,7 +81,7 @@ export default function JobTitle() {
               <span>Architecture & Interior Design</span>
               <i className="fa-solid fa-arrow-right" />
             </div>
-            <div className="popular__item">
+            <div className="popular-item">
               <img
                 src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101624/Photoshop%20Editing_2x.png"
                 alt=""
@@ -89,7 +89,7 @@ export default function JobTitle() {
               <span>Image Editing</span>
               <i className="fa-solid fa-arrow-right" />
             </div>
-            <div className="popular__item">
+            <div className="popular-item">
               <img
                 src="https://fiverr-res.cloudinary.com/f_auto,q_auto/v1/attachments/generic_asset/asset/fc6c7b8c1d155625e7878252a09c4437-1653222039380/Nft%20Art%20%281%29.png"
                 alt=""
@@ -97,7 +97,7 @@ export default function JobTitle() {
               <span>NFT Art</span>
               <i className="fa-solid fa-arrow-right" />
             </div>
-            <div className="popular__item">
+            <div className="popular-item">
               <img
                 src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101623/T-Shirts%20_%20Merchandise_2x.png"
                 alt=""
@@ -115,18 +115,18 @@ export default function JobTitle() {
           <h1 className="title">
             Explore {jobTitle[0]?.tenLoaiCongViec}
           </h1>
-          <div className="explore__content">
+          <div className="explore-content">
             {jobTitle.length !== 0 && renderExploreContent()}
           </div>
         </div>
       </div>
 
       <div className="services-related">
-        <div className="container mt-lg-5 mb-lg-5 mt-md-4 mb-md-4 mt-sm-2 mb-sm-2 text-center">
+        <div className="container mt-lg-4 mb-lg-5 mt-md-4 mb-md-4 mt-sm-2 mb-sm-2 text-center">
           <h1 className="mb-lg-5 mb-md-4 mb-sm-2">
             Services Related To {jobTitle[0]?.tenLoaiCongViec}
           </h1>
-          <div className="services-related__content d-flex align-items-center justify-content-center flex-wrap">
+          <div className="services-related-content d-flex align-items-center justify-content-center flex-wrap">
             <span>Minimalist Logo Design</span>
             <span>Signature Logo Design</span>
             <span>Mascot Logo Design</span>
@@ -145,6 +145,6 @@ export default function JobTitle() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

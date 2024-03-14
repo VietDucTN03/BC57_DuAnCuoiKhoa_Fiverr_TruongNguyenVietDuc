@@ -20,13 +20,13 @@ import Result from "./pages/Result/Result";
 import Detail from "./pages/Detail/Detail";
 import JobTitle from "./pages/JobTitle/JobTitle";
 import Categories from "./pages/Categories/Categories";
-import UserTemplate from "./templates/UserTemplate";
-import Admin from "./pages/Admin/Admin";
+import UserTemplate from "./templates/UserTemplate"; 
 import AdminTemplate from "./templates/AdminTemplate";
 import UserManagement from "./pages/Admin/TableContent/UserManagement";
 import JobManagement from "./pages/Admin/TableContent/JobManagement";
 import JobTypeManagement from "./pages/Admin/TableContent/JobTypeManagement";
 import ServiceManagement from "./pages/Admin/TableContent/ServiceManagement";
+import Management from "./pages/Admin/Management";
 
 export const history = createBrowserHistory();
 
@@ -49,6 +49,7 @@ root.render(
           <Route path="register" element={<Register />} />
         </Route>
         <Route path="admin" element={<AdminTemplate/>}>
+          <Route path="management" element={<Management/>}/> 
           <Route path="user-management" element={<UserManagement/>}/>
           <Route path="job-management" element={<JobManagement/>}/>
           <Route path="job-type-management" element={<JobTypeManagement/>}/>
