@@ -10,6 +10,7 @@ import '../../assets/scss/pages/Detail/detail.scss';
 import { getJobDetailByIAsyncThunkDAPI } from '../../redux/reducers/JobReducer';
 import { getCommentByJob, postComment, postCommentAsyncThunkAction } from '../../redux/reducers/CommentReducer';
 import dayjs from 'dayjs';
+import unknownAvatar from '../../assets/image/Avatar.jpg';
 
 const collapseText = `
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -78,9 +79,9 @@ const Detail = () => {
                     dispatch(getCommentByJob(params.id));
                 })
                 .catch((error) => {
-                    console.error('Error upload Avatar:', error);
+                    console.error('Error upload Comment:', error);
                 });
-            console.log(values);
+            // console.log(values);
         }
     })
 
@@ -95,7 +96,7 @@ const Detail = () => {
                             src={
                                 avatar
                                     ? avatar
-                                    : 'https://static.thenounproject.com/png/363639-200.png'
+                                    : unknownAvatar
                             }
                             alt=""
                             className="rounded-circle"

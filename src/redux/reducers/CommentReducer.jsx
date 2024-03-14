@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ACCESS_TOKEN, TOKEN_CYBERSOFT, http } from '../../util/config';
+import { notification } from 'antd';
+import { history } from '../../index';
 
 const initialState = {
   arrComment: [],
@@ -34,7 +36,7 @@ export const getCommentByJob = createAsyncThunk('commentReducer/getCommentByJob'
 })
 
 export const postCommentAsyncThunkAction = createAsyncThunk(
-  'jobReducer/postCommentAsyncThunkAction',
+  'commentReducer/postCommentAsyncThunkAction',
   async (body) => {
     try {
       const accessToken = localStorage.getItem(ACCESS_TOKEN);
@@ -45,9 +47,18 @@ export const postCommentAsyncThunkAction = createAsyncThunk(
           'tokenCybersoft': TOKEN_CYBERSOFT
         }
       });
+      notification.success({
+        message: 'Thêm bình luận thành công!!',
+        duration: 5,
+      });
       return res.data.content;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      notification.error({
+        message: 'Hãy đăng nhập để comment!!',
+        duration: 5,
+      }); 
+      history.push('/user/login');
     }
   }
 );

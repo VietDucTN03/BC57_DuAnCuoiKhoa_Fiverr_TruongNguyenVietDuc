@@ -76,7 +76,7 @@ export default function JobContract() {
                         </p>
                         <div className="gigs__btn">
                             <button
-                                className="btn btn-gigs btn-success mr-3"
+                                className="btn btn-gigs btn-success mx-2"
                                 onClick={() => navigate(`/job-detail/${job.congViec.id}`)}
                             >
                                 View Detail
