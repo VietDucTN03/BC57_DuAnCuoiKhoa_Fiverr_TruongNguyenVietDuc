@@ -160,10 +160,6 @@ export default function UserManagement() {
       dispatch(deleteUserAsyncThunkAction(id))
         .then(() => {
           dispatch(getAllUserAsyncThunkAction());
-          notification.success({
-            message: 'Delete Successfull!!',
-            duration: 5,
-          });
         })
         .catch((error) => {
           console.error('Error deleting job:', error);

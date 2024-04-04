@@ -98,7 +98,7 @@ const Header = () => {
     localStorage.removeItem('tokenCyberSoft');
     localStorage.removeItem('userId');
     localStorage.removeItem(ACCESS_TOKEN);
-    // localStorage.removeItem(USER_INFO);
+    localStorage.removeItem(USER_LOGIN);
     localStorage.removeItem(USER_PROFILE);
     // setIsLoggedIn(false);
     history.push('/user/login');
@@ -109,7 +109,7 @@ const Header = () => {
       return (
         <>
           <li className="nav-item">
-            <NavLink className="nav-link" aria-disabled="true" to="/user/register">Register</NavLink>
+            <NavLink className="register-btn nav-link" aria-disabled="true" to="/user/register">Register</NavLink>
           </li>
           <li className="nav-item join">
             <NavLink className="join-btn nav-link" to="/user/login">Join</NavLink>
@@ -129,7 +129,7 @@ const Header = () => {
             </div>
           </button>
           <div className="dropdown-menu">
-            <li className="nav-item d-flex">
+            <li className="link-profile nav-item d-flex">
               <i className="fa-solid fa-user" />
               <NavLink className="nav-link nav-profile" aria-disabled="true" to="/user/profile">Profile</NavLink>
             </li>

@@ -11,7 +11,8 @@ let userLoginDefault = {
 const DEFAULT_STATE = {
   userRegister: getStore(USER_REGISTER),
   userLogin: userLoginDefault,
-  userInfo: null,
+  // userLogin: null,
+  userInfoFromLogin: null,
   userList: [],
   userProfile: getStoreJson(USER_PROFILE),
   avatar: null,
@@ -26,7 +27,7 @@ const DEFAULT_STATE = {
 const stringify = localStorage.getItem(USER_LOGIN);
 
 if (stringify) {
-  DEFAULT_STATE.userInfo = JSON.parse(stringify);
+  DEFAULT_STATE.userInfoFromLogin = JSON.parse(stringify);
 }
 
 const UserReducer = createSlice({
@@ -39,12 +40,12 @@ const UserReducer = createSlice({
     loginAction(state, action) {
       state.userLogin = action.payload;
     },
-    setUserInfo(state, action) {
-      state.userInfo = action.payload;
-    },
-    reloadUser(state, action) {
-      state.userInfo.user = action.payload;
-    },
+    // setUserInfo(state, action) {
+    //   state.userInfoFromLogin = action.payload;
+    // },
+    // reloadUser(state, action) {
+    //   state.userInfoFromLogin.user = action.payload;
+    // },
     uploadAvatarAction(state, action) {
       state.avatar = action.payload;
     },
@@ -79,7 +80,7 @@ const UserReducer = createSlice({
 
 export const { registerAction, loginAction, setUserInfo, reloadUser, uploadAvatarAction, updateProfileAction, editUserACtion } = UserReducer.actions;
 
-export const selectUserInfo = (state) => state.user.userInfo;
+// export const selectUserInfo = (state) => state.user.userInfo;
 
 export default UserReducer.reducer;
 
@@ -92,7 +93,7 @@ export const registerAPI = (userRegister) => {
       dispatch(action);
 
       notification.success({
-        message: 'Account registered successfully!!',
+        message: 'Tạo tài khoản thành công!!',
         duration: 5,
       });
       history.push('/user/login');
@@ -110,22 +111,23 @@ export const loginAPI = (userLogin) => {
       localStorage.setItem('userId', result.data.content.user.id);
       localStorage.setItem('tokenCyberSoft', TOKEN_CYBERSOFT);
       localStorage.setItem(ACCESS_TOKEN, result.data.content.token);
-      // localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content.user));
+      localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content.user));
       const action = loginAction(result.data.content)
       console.log(action);
       dispatch(action);
 
-      const role = result.data.content.user.role;
-      if (role === 'ADMIN') {
-        history.push('/admin/management');
-      } else {
-        history.push('/');
-      }
+      // const role = result.data.content.user.role;
+      // if (role == 'ADMIN') {
+      //   history.push('/admin/management');
+      // } else {
+      //   history.push('/');
+      // }
 
       notification.success({
-        message: 'Logged in successfully!!',
+        message: 'Đăng nhập thành công!!',
         duration: 5,
       });
+      history.push('/');
 
     } catch (err) {
 
@@ -152,7 +154,7 @@ export const postUserAsyncThunkAction = createAsyncThunk(
 
       const res = await http.post('/users', user);
       notification.success({
-        message: 'Add ADMIN Successfull!!',
+        message: 'Thêm Admin thành công!!',
         duration: 5,
       });
       console.log(res.data.content);
@@ -194,6 +196,10 @@ export const putEditUserAPI = (editUser, id) => {
 export const deleteUserAsyncThunkAction = createAsyncThunk('userReducer/deleteUserAsyncThunkAction', async (id) => {
   try {
     const res = await http.delete(`/users/?id=${id}`);
+    notification.success({
+      message: res.data.message,
+      duration: 5,
+    });
     return res.data.content;
   } catch (err) {
     console.log(err);

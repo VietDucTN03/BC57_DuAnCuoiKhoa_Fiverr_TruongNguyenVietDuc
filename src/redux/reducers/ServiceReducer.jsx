@@ -57,7 +57,7 @@ export const postServiceAsyncThunkAction = createAsyncThunk(
                 }
             });
             notification.success({
-                message: 'Add SERVICE Successfull!!',
+                message: res.data.message,
                 duration: 5,
             });
 
@@ -89,7 +89,7 @@ export const putEditServiceAPI = (editJob, id) => {
 
             dispatch(editServiceACtion(response.data.content));
             notification.success({
-                message: 'Cập nhật Job thành công!!',
+                message: response.data.message,
                 duration: 5,
             });
             console.log(response.data.content);
@@ -109,7 +109,7 @@ export const deleteServiceAsyncThunkAction = createAsyncThunk('serviceReducer/de
             }
         });
         notification.success({
-          message: 'Delete Successfull!!',
+          message: res.data.message,
           duration: 5,
         });
         return res.data.content;

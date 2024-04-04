@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import InfoJob from './InfoJob'
 import CheckOut from './CheckOut'
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

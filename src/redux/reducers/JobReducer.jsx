@@ -110,6 +110,10 @@ export const hireJobAsyncThunkAction = createAsyncThunk(
           'tokenCybersoft': TOKEN_CYBERSOFT
         }
       });
+      notification.success({
+        message: res.data.message,
+        duration: 5,
+      });
       return res.data.content;
     } catch (err) {
       // return thunkAPI.rejectWithValue(err.response.data);
@@ -145,9 +149,17 @@ export const deleteHiredJobAsyncThunkAction = createAsyncThunk('jobReducer/delet
         'tokenCybersoft': TOKEN_CYBERSOFT
       }
     });
+    notification.success({
+      message: res.data.message,
+      duration: 5,
+    });
     return res.data.content;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    notification.error({
+      message: err.response.data.message,
+      duration: 5,
+    });
   }
 });
 
@@ -176,41 +188,56 @@ export const deleteJobAsyncThunkAction = createAsyncThunk('jobReducer/deleteJobA
         // 'tokenCybersoft': TOKEN_CYBERSOFT
       }
     });
+    notification.success({
+      message: res.data.message,
+      duration: 5,
+    });
     return res.data.content;
   } catch (err) {
+    notification.error({
+      message: err.response.data.content,
+      duration: 5,
+    });
     console.log(err);
   }
 });
 
 export const postJobAsyncThunkAction = createAsyncThunk(
   'jobReducer/postJobAsyncThunkAction', async (values) => {
-  try {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN);
-    const userId = localStorage.getItem('userId');
+    try {
+      const accessToken = localStorage.getItem(ACCESS_TOKEN);
+      const userId = localStorage.getItem('userId');
 
-    const job = {
-      tenCongViec: values.tenCongViec,
-      moTa: values.moTa,
-      moTaNgan: values.moTaNgan,
-      giaTien: values.giaTien,
-      nguoiTao: userId,
-      danhGia: values.danhGia,
-      maChiTietLoaiCongViec: values.maChiTietLoaiCongViec,
-      saoCongViec: values.saoCongViec,
-    };
+      const job = {
+        tenCongViec: values.tenCongViec,
+        moTa: values.moTa,
+        moTaNgan: values.moTaNgan,
+        giaTien: values.giaTien,
+        nguoiTao: userId,
+        danhGia: values.danhGia,
+        maChiTietLoaiCongViec: values.maChiTietLoaiCongViec,
+        saoCongViec: values.saoCongViec,
+      };
 
-    const res = await http.post('/cong-viec', job, {
-      headers: {
-        token: accessToken,
-      }
-    });
-    console.log(res.data.content);
+      const res = await http.post('/cong-viec', job, {
+        headers: {
+          token: accessToken,
+        }
+      });
+      notification.success({
+        message: res.data.message,
+        duration: 5,
+      });
+      console.log(res.data.content);
 
-    return res.data.content;
-  } catch (err) {
-    console.log(err);
-  }
-})
+      return res.data.content;
+    } catch (err) {
+      notification.error({
+        message: err.response.data.content,
+        duration: 5,
+      });
+    }
+  })
 
 export const uploadImgJobAsyncThunkAction = createAsyncThunk(
   'jobReducer/uploadImgJobAsyncThunkAction',
@@ -231,7 +258,7 @@ export const uploadImgJobAsyncThunkAction = createAsyncThunk(
 
       thunkAPI.dispatch(uploadImgJobAction(response.data.content));
       notification.success({
-        message: 'Cập nhật ảnh Công việc thành công!!',
+        message: response.data.message,
         duration: 5,
       });
       console.log(response.data.content);
@@ -263,7 +290,7 @@ export const putEditJobAPI = (editJob, id) => {
 
       dispatch(editJobACtion(response.data.content));
       notification.success({
-        message: 'Cập nhật Job thành công!!',
+        message: response.data.message,
         duration: 5,
       });
       console.log(response.data.content);

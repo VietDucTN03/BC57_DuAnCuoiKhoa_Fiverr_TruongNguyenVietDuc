@@ -32,12 +32,7 @@ const CheckOut = () => {
         hoanThanh: false,
       }
       dispatch(hireJobAsyncThunkAction(body))
-        .then((res) => {
-          console.log(res);
-          notification.success({
-            message: 'Hire job successful!!',
-            duration: 5,
-          });
+        .then(() => {
           history.push('/user/profile');
         })
         .catch((error) => {
@@ -45,7 +40,7 @@ const CheckOut = () => {
         });
     } else {
       notification.error({
-        message: 'Login to visit this page!',
+        message: 'Đăng nhập để vào trang!',
         duration: 5,
       });
       history.push('/user/login');

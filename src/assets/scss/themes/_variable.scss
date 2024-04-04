@@ -176,26 +176,6 @@ $fw-maxbold: 900;
   }
 }
 
-// @mixin buttonActionNextPervious {
-//     &::after {
-//         width: 40px; /* Đặt kích thước */
-//         height: 40px; /* Đặt kích thước */
-//         border-radius: 50%; /* Để tạo hình tròn */
-//         background-color: #ccc; /* Màu nền */
-//         border: none; /* Loại bỏ viền */
-//         cursor: pointer; /* Đổi con trỏ khi di chuột */
-//         display: flex; /* Hiển thị theo chiều ngang */
-//         justify-content: center; /* Canh giữa theo chiều ngang */
-//         align-items: center; /* Canh giữa theo chiều dọc */
-//         transition: width 0.3s, height 0.3s; /* Hiệu ứng chuyển đổi kích thước */
-//     }
-
-//     &:hover {
-//         width: 44px; /* Tăng kích thước khi hover */
-//         height: 44px; /* Tăng kích thước khi hover */
-//     }
-// }
-
 @mixin enlarge {
   &::after {
     display: inline-block;

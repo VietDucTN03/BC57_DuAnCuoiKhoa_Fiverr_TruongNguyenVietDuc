@@ -43,10 +43,6 @@ export default function JobTypeManagement() {
         dispatch(actionAsync)
           .then(() => {
             dispatch(getJobTypeAsyncThunkAction());
-            notification.success({
-              message: 'Add JOB Type Successfull!!',
-              duration: 5,
-            });
           })
           .catch((error) => {
             console.error('Error adding job type:', error);
@@ -62,10 +58,6 @@ export default function JobTypeManagement() {
       dispatch(deleteJobTypeAsyncThunkAction(id))
         .then(() => {
           dispatch(getJobTypeAsyncThunkAction());
-          notification.success({
-            message: 'Delete Successfull!!',
-            duration: 5,
-          });
         })
         .catch((error) => {
           console.error('Error deleting job:', error);

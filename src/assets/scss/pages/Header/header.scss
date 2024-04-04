@@ -13,11 +13,43 @@
     height: 70px;
     padding: 10px;
     .button-showMenu {
-      width: 90px;
-      height: 50px;
+      height: 70px;
+      @include button($fz-xl4, $fw-maxbold, $c0-text-light, $c0-bg-button, none, $c0-text-green1, $c0-text-light);
     }
     .drawer-menu-header {
       z-index: 9999;
+    }
+  }
+  .job-menu {
+    .menu-job {
+      display: none;
+    }
+  }
+}
+
+.ant-drawer-body {
+  .nav-link {
+    @include text($fz-xl, $fw-medium, $c0-text-dark);
+  }
+  .register-btn {
+    width: 25%;
+    text-align: center;
+    border: 1px solid $c0-text-dark;
+    border-radius: 15px;
+    padding: 5px 0;
+  }
+  .join-btn {
+    @include button($fz-base, $fw-medium, $c0-text-light1, $c0-bg-button, none, #157347, $c0-text-light);
+    width: 25%;
+    padding: 5px 0;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .link-profile {
+    margin-left: 15px;
+    .fa-user {
+      margin: 7px 7px 0 0;
     }
   }
 }

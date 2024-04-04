@@ -49,6 +49,10 @@ export const postJobTypeAsyncThunkAction = createAsyncThunk(
                     token: accessToken,
                 }
             });
+            notification.success({
+              message: res.data.message,
+              duration: 5,
+            });
             console.log(res.data.content);
 
             return res.data.content;
@@ -65,6 +69,10 @@ export const deleteJobTypeAsyncThunkAction = createAsyncThunk('jobTypeReducer/de
                 'token': accessToken,
                 // 'tokenCybersoft': TOKEN_CYBERSOFT
             }
+        });
+        notification.success({
+          message: res.data.message,
+          duration: 5,
         });
         return res.data.content;
     } catch (err) {
@@ -92,7 +100,7 @@ export const putEditJobTypeAPI = (editJob, id) => {
 
             dispatch(editJobTypeACtion(response.data.content));
             notification.success({
-                message: 'Cập nhật Job Type thành công!!',
+                message: response.data.message,
                 duration: 5,
             });
             console.log(response.data.content);

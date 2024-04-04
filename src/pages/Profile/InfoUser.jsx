@@ -13,8 +13,11 @@ export default function InfoUser() {
   const userId = localStorage.getItem('userId');
   const dispatch = useDispatch();
   const [useUserProfile, setUseUserProfile] = useState(false);
-  const userInfo = useSelector((state) => state.userReducer.userInfo);
+  const userInfo = useSelector((state) => state.userReducer.userInfoFromLogin);
+  // const userLogin = useSelector((state) => state.userReducer.userLogin);
+  // console.log(userLogin); 
   const userProfile = useSelector((state) => state.userReducer.userProfile);
+  console.log(userProfile);
 
   useEffect(() => {
     if (!userProfile && userId) {
@@ -27,6 +30,20 @@ export default function InfoUser() {
       history.push('/user/login');
     }
   }, [dispatch, userProfile]);
+
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleEditProfile = (userID) => {
+    setSelectedUserId(userID);
+    dispatch(getUserByIDAPI(userID));
+    console.log(userID);
+    setVisible(true);
+  };
 
   useEffect(() => {
     if (userProfile && Object.keys(userProfile).length !== 0) {
@@ -47,14 +64,23 @@ export default function InfoUser() {
   };
 
   const form = useFormik({
+    enableReinitialize: true,
     initialValues: {
       name: useUserProfile ? userProfile?.name || '' : userInfo?.name || '',
       birthday: useUserProfile ? userProfile?.birthday || '' : userInfo?.birthday || '',
       email: userProfile ? userProfile.email : '',
       phone: useUserProfile ? userProfile?.phone || '' : userInfo?.phone || '',
-      gender: useUserProfile ? userProfile?.gender || true : userInfo?.gender || true,
+      gender: useUserProfile ? userProfile?.gender ? 'true' : 'false' : userInfo?.gender || true,
       certification: useUserProfile ? userProfile?.certification || [] : userInfo?.certification || [],
       skill: useUserProfile ? userProfile?.skill || [] : userInfo?.skill || [],
+
+      // name: userProfile?.name || '',
+      // birthday: userProfile?.birthday || '',  
+      // email: userProfile?.email || '',
+      // phone: userProfile?.phone || '',
+      // gender: userProfile?.gender ? 'true' : 'false',
+      // certification: userProfile?.certification || '',
+      // skill: userProfile?.skill || '',
     },
     validate: (values) => {
       const errors = {};
@@ -88,12 +114,6 @@ export default function InfoUser() {
   });
 
   const { birthday, certification, email, name, phone, skill } = form.values;
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
-
-  const [visible, setVisible] = useState(false);
 
   return (
     <>
@@ -155,7 +175,7 @@ export default function InfoUser() {
                   <h3>Description</h3>
                   <button
                     className="btn edit-btn"
-                    onClick={() => setVisible(true)}
+                    onClick={() => handleEditProfile(userId)}
                   >
                     <i className="fa-solid fa-pen-to-square" />
                   </button>

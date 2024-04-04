@@ -11,7 +11,8 @@ export default function AdminTemplate() {
 
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
-    const userInfo = useSelector((state) => state.userReducer.userProfile);
+    const userInfo = useSelector((state) => state.userReducer.userInfoFromLogin);
+    console.log(userInfo);
     const dispatch = useDispatch();
 
     useEffect(() => {

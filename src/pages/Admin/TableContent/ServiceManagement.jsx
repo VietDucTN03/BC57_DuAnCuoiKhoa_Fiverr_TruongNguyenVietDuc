@@ -3,12 +3,21 @@ import { Modal, Table, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteServiceAsyncThunkAction, getServiceAsyncThunkAction, getViewServiceAPI, postServiceAsyncThunkAction, putEditServiceAPI } from '../../../redux/reducers/ServiceReducer';
 import { useFormik } from 'formik';
+import { getJobAsyncThunkAction } from '../../../redux/reducers/JobReducer';
 
 export default function ServiceManagement() {
 
   const dispatch = useDispatch();
   const arrService = useSelector((state) => state.serviceReducer.arrService);
   // console.table(arrService)
+
+  //Render Name
+  const arrJobManage = useSelector((state) => state.jobReducer.arrJobManage);
+  // console.table(arrJobManage);
+
+  useEffect(() => {
+    dispatch(getJobAsyncThunkAction());
+  }, [dispatch])
 
   //GET ALL SERVICE
   useEffect(() => {
@@ -37,9 +46,9 @@ export default function ServiceManagement() {
         }
       });
 
-      if (!/^\d+$/.test(values.maCongViec) && values.maCongViec !== '') {
-        errors.maCongViec = 'Job ID must be a number';
-      }
+      // if (!/^\d+$/.test(values.maCongViec) && values.maCongViec !== '') {
+      //   errors.maCongViec = 'Job ID must be a number';
+      // }
 
       if (!/^\d+$/.test(values.maNguoiThue) && values.maNguoiThue !== '') {
         errors.maNguoiThue = 'Hirer ID must be a number';
@@ -239,10 +248,15 @@ export default function ServiceManagement() {
               <div className="form-group mt-3">
                 <label htmlFor="maCongViec">Job ID</label>
                 <div className="form-input">
-                  <input type="text" onBlur={formAdd.handleBlur}
+                  <select
                     className={`form-control ${formAdd.errors.maCongViec && formAdd.touched.maCongViec ? 'is-invalid' : ''}`}
-                    id="maCongViec" name='maCongViec' placeholder="Name Job" value={formAdd.values.maCongViec}
-                    onChange={formAdd.handleChange} />
+                    id="maCongViec" name='maCongViec' value={formAdd.values.maCongViec}
+                    onChange={(e) => formAdd.setFieldValue('maCongViec', e.target.value)}> {/* Cập nhật maCongViec với ID của công việc được chọn */}
+                    <option value="">Select Job</option>
+                    {arrJobManage.map(job => (
+                      <option key={job.id} value={job.id}>{job.tenCongViec}</option>
+                    ))}
+                  </select>
                   {formAdd.errors.maCongViec && formAdd.touched.maCongViec && (
                     <div className="invalid-feedback" style={{ color: 'red' }}>
                       {formAdd.errors.maCongViec}
@@ -332,10 +346,15 @@ export default function ServiceManagement() {
               <div className="form-group mt-3">
                 <label htmlFor="maCongViec">Job ID</label>
                 <div className="form-input">
-                  <input type="text" onBlur={formUpdate.handleBlur}
+                  <select
                     className={`form-control ${formUpdate.errors.maCongViec && formUpdate.touched.maCongViec ? 'is-invalid' : ''}`}
-                    id="maCongViec" name='maCongViec' placeholder="Input Job ID" value={formUpdate.values.maCongViec}
-                    onChange={formUpdate.handleChange} />
+                    id="maCongViec" name='maCongViec' value={formUpdate.values.maCongViec}
+                    onChange={(e) => formUpdate.setFieldValue('maCongViec', e.target.value)}>
+                    <option value="">Select Job</option>
+                    {arrJobManage.map(job => (
+                      <option key={job.id} value={job.id}>{job.tenCongViec}</option>
+                    ))}
+                  </select>
                   {formUpdate.errors.maCongViec && formUpdate.touched.maCongViec && (
                     <div className="invalid-feedback" style={{ color: 'red' }}>
                       {formUpdate.errors.maCongViec}

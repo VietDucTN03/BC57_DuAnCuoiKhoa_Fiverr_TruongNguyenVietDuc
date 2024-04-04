@@ -48,7 +48,7 @@ export const postCommentAsyncThunkAction = createAsyncThunk(
         }
       });
       notification.success({
-        message: 'Thêm bình luận thành công!!',
+        message: res.data.message,
         duration: 5,
       });
       return res.data.content;

@@ -82,11 +82,7 @@ export default function JobManagement() {
         dispatch(actionAsync)
           .then(() => {
             dispatch(getJobAsyncThunkAction());
-            notification.success({
-              message: 'Add JOB Successfull!!',
-              duration: 5,
-            });
-            setSelectedFile(null); // Reset selected file after successful upload
+            setSelectedFile(null);
           })
           .catch((error) => {
             console.error('Error adding job:', error);
@@ -213,10 +209,6 @@ export default function JobManagement() {
       dispatch(deleteJobAsyncThunkAction(id))
         .then(() => {
           dispatch(getJobAsyncThunkAction());
-          notification.success({
-            message: 'Delete Successfull!!',
-            duration: 5,
-          });
         })
         .catch((error) => {
           console.error('Error deleting job:', error);
